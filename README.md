@@ -1,4 +1,4 @@
-# attendance-system
+# system
 
 ## Project setup
 ```
