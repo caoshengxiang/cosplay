@@ -1,0 +1,160 @@
+@import "./var";
+@import "mixins";
+
+// 文字一行显示
+.com-a-line-dash {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden
+}
+
+// 文字单行显示,注意顺序
+.com-a-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 红星号
+.com-red-dot {
+  &:before {
+    content: '*';
+    display: inline-block;
+    color: red;
+    padding-right: 3px;
+  }
+}
+
+// 虚线
+.com-dashed-line {
+  width: 100%;
+  //height: 0px;
+  border-bottom: 1px dashed #ccc;
+}
+
+.com-a-link {
+  color: $font-color-4;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.pages-view {
+  padding: 20px;
+
+  .pages-main-top {
+    height: 34px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .pages-main-con {
+    min-width: 960px;
+
+    .page-main-bar {
+      padding: 20px;
+      background-color: #f9f9f9;
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+
+      .pages-input-w {
+        width: 215px;
+      }
+
+      .pages-input-ww {
+        width: 115px;
+      }
+
+      .page-search-item {
+        margin-bottom: 10px;
+        width: 140px;
+      }
+
+      .page-bar-left {
+        display: inline-block;
+      }
+
+      .page-bar-right {
+        width: 90%;
+        display: inline-block;
+
+        &:after {
+          content: '';
+          display: inline-block;
+          clear: both;
+        }
+      }
+    }
+
+    .page-main-d {
+
+      .pages-p {
+        text-align: right;
+        margin: 20px;
+      }
+    }
+
+    .page-detail-box {
+      width: 900px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      min-height: 600px;
+    }
+  }
+}
+
+.pages-dialog-footer {
+  text-align: center;
+}
+
+.pages-button-w {
+  width: 140px;
+}
+
+.detail-table {
+  width: 100%;
+
+  &.related-table { // 相关信息
+    th, td {
+      text-align: center;
+
+      .table-op {
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  font-size: $font-size-small-extra-extra;
+  margin-bottom: 20px;
+
+  td, th {
+    border: 1px solid #ccc;
+    padding: 6px 5px;
+    width: 140px;
+    font-weight: normal;
+  }
+
+  .td-title {
+    text-align: center;
+    background-color: #DEEBFF;
+    width: 120px;
+  }
+
+  .td-center {
+    text-align: center;
+  }
+
+  .td-text {
+
+  }
+}
+
+.com-editor-box {
+  em {
+    font-style: italic;
+  }
+}
