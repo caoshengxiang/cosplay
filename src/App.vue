@@ -5,4 +5,8 @@
 </template>
 
 <style lang="less">
+  @import "styles/var";
+  #app {
+    color: @main-color;
+  }
 </style>

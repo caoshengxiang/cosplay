@@ -15,7 +15,7 @@ const router = new Router({
       // name: 'HelloWorld',
       // component: HelloWorld
       name: 'root',
-      redirect: '/cosplay/home',
+      redirect: '/web/home',
     },
     // {
     //   path: '/login',
@@ -27,7 +27,7 @@ const router = new Router({
     //   },
     // },
     {
-      path: '/cosplay',
+      path: '/web',
       name: 'web',
       component: routerV,
       children: [
@@ -35,6 +35,36 @@ const router = new Router({
           path: 'home',
           name: 'home',
           component: () => import('./views/home/home'),
+          meta: {},
+        },
+        {
+          path: 'product',
+          name: 'product',
+          component: () => import('./views/product/product'),
+          meta: {},
+        },
+        {
+          path: 'news',
+          name: 'news',
+          component: () => import('./views/news/news'),
+          meta: {},
+        },
+        {
+          path: 'faqs',
+          name: 'faqs',
+          component: () => import('./views/faqs/faqs'),
+          meta: {},
+        },
+        {
+          path: 'about',
+          name: 'about',
+          component: () => import('./views/about/about'),
+          meta: {},
+        },
+        {
+          path: 'contact',
+          name: 'contact',
+          component: () => import('./views/contact/contact'),
           meta: {},
         },
         {

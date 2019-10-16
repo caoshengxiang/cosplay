@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
-import './styles/basic.css'
+import './styles/basic.less'
 import './element_ui' // element
 import './components/register'
 
