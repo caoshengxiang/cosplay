@@ -18,12 +18,53 @@
                         fit="fit"></el-image>
             </div>
         </div>
-        <div class="com-item-fill">
+        <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
                     <div class="nav-pos">HOME > PRODUCTS > Iron Man Costumes</div>
                     <div class="box">
+                        <div class="l">
+                            <div class="b">
+                                <div class="title">CONTACT US</div>
+                                <div class="item-box">
+                                    <div>
+                                        Chengdu Gauss Power
+                                        Art Co.,Ltd
+                                    </div>
+                                    <div>Mob：+860283928272</div>
+                                    <div>Email：dkjfi@163.com</div>
+                                    <div>
+                                        Add：Room 1415, Floor
+                                        14th,Unit 1 Building 2
+                                        Wanda SquareQingyang
+                                        district, Chengdu China
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="r">
+                            <div class="p-list">
+                                <el-row>
+                                    <el-col v-for="i in 6" :key="i" :span="24">
+                                        <div class="p-item">
+                                            <div class="f-i">
+                                                <div class="index">{{i+1}}</div>
+                                            </div>
+                                            <div class="detail">
+                                                <div class="q">Q : The costumes are fit for adults or young? </div>
+                                                <div class="a">A : our all costumes fit for adults.</div>
+                                            </div>
 
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-pagination
+                                        background
+                                        layout="prev, pager, next"
+                                        :total="1000">
+                                </el-pagination>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,12 +120,17 @@
             }
         }
 
+        .pro-bg {
+            background-image: url("../../../public/img/bg02.png");
+            background-size: 100% 750px;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+        }
         .logo-bg {
             background-image: url("../../../public/img/bg01.png");
             background-repeat: no-repeat;
-            background-position: 0 100%;
+            background-position: 0 calc(100% - 50px);
             background-size: 255px;
-            margin-bottom: 50px;
         }
         .contain {
             margin-left: 140px;
@@ -97,7 +143,80 @@
             }
             .box {
                 min-height: 900px;
-                border: 1px solid red;
+                display: flex;
+                padding-bottom: 40px;
+
+                .l {
+                    width: 250px;
+                    padding-right: 16px;
+                    border-right: 1px dashed #D3D3D3;
+
+                    .b {
+                        .title {
+                            height: 68px;
+                            line-height: 68px;
+                            text-align: center;
+                            background: rgba(251, 164, 35, 1);
+                            font-size: 33px;
+                            font-family: BebasNeueRegular;
+                            font-weight: bold;
+                            color: rgba(23, 23, 23, 1);
+                        }
+
+                        .item-box {
+                            padding: 30px 0;
+                            div {
+                                font-size:19px;
+                                font-family:PingFang SC;
+                                font-weight:bold;
+                                color:rgba(23,23,23,1);
+                                margin-bottom: 30px;
+                                line-height: 1.6;
+                            }
+                        }
+                    }
+                }
+
+                .r {
+                    flex: 1;
+                    padding-left: 16px;
+                    .p-list {
+                        .p-item {
+                            margin-bottom: 70px;
+                            display: flex;
+                            .f-i {
+                                .index {
+                                    width: 54px;
+                                    height: 54px;
+                                    line-height: 54px;
+                                    text-align: center;
+                                    background:rgba(23,23,23,1);
+                                    font-size:33px;
+                                    font-family:BebasNeueRegular;
+                                    font-weight:bold;
+                                    color:rgba(243,193,60,1);
+                                    margin-right: 16px;
+                                }
+                            }
+                            .detail {
+                                .q {
+                                    font-size:19px;
+                                    font-family:PingFang SC;
+                                    font-weight:bold;
+                                    color:rgba(23,23,23,1);
+                                }
+                                .a {
+                                    font-size:16px;
+                                    font-family:PingFang SC;
+                                    font-weight:bold;
+                                    color:rgba(85,85,85,1);
+                                    line-height:22px;
+                                    margin-top: 6px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

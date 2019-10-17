@@ -18,7 +18,7 @@
                         fit="fit"></el-image>
             </div>
         </div>
-        <div class="com-item-fill">
+        <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
                     <div class="nav-pos">HOME > PRODUCTS > Iron Man Costumes</div>
@@ -137,12 +137,17 @@
             }
         }
 
+        .pro-bg {
+            background-image: url("../../../public/img/bg02.png");
+            background-size: 100% 750px;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+        }
         .logo-bg {
             background-image: url("../../../public/img/bg01.png");
             background-repeat: no-repeat;
-            background-position: 0 100%;
+            background-position: 0 calc(100% - 50px);
             background-size: 255px;
-            margin-bottom: 50px;
         }
         .contain {
             margin-left: 140px;
@@ -156,6 +161,7 @@
             .box {
                 min-height: 900px;
                 display: flex;
+                padding-bottom: 40px;
 
                 .l {
                     width: 250px;
@@ -196,8 +202,8 @@
                             margin-bottom: 41px;
                             display: flex;
                             .pro-img {
-                                width: 178px;
-                                height: 229px;
+                                width: 163px;
+                                height: 163px;
                             }
                             .detail {
                                 margin-left: 33px;
@@ -206,6 +212,7 @@
                                     font-family:PingFang SC;
                                     font-weight:bold;
                                     color:rgba(23,23,23,1);
+                                    margin-bottom: 23px;
                                 }
                                 .text {
                                     font-size:16px;
@@ -218,7 +225,6 @@
                                     -webkit-line-clamp: 3;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
-                                    padding: 23px 0;
                                 }
                                 .time {
                                     font-size:16px;
@@ -226,6 +232,7 @@
                                     font-weight:bold;
                                     color:rgba(85,85,85,1);
                                     line-height:22px;
+                                    margin-top: 23px;
                                 }
                             }
                         }

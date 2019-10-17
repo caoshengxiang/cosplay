@@ -18,7 +18,7 @@
                         fit="fit"></el-image>
             </div>
         </div>
-        <div class="com-item-fill">
+        <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
                     <div class="nav-pos">HOME > PRODUCTS > Iron Man Costumes</div>
@@ -127,12 +127,17 @@
             }
         }
 
+        .pro-bg {
+            background-image: url("../../../public/img/bg02.png");
+            background-size: 100% 750px;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+        }
         .logo-bg {
             background-image: url("../../../public/img/bg01.png");
             background-repeat: no-repeat;
-            background-position: 0 100%;
+            background-position: 0 calc(100% - 50px);
             background-size: 255px;
-            margin-bottom: 50px;
         }
 
         .contain {
@@ -149,6 +154,7 @@
             .box {
                 min-height: 900px;
                 display: flex;
+                padding-bottom: 40px;
 
                 .l {
                     width: 250px;

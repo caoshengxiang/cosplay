@@ -18,12 +18,64 @@
                         fit="fit"></el-image>
             </div>
         </div>
-        <div class="com-item-fill">
+        <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
                     <div class="nav-pos">HOME > PRODUCTS > Iron Man Costumes</div>
                     <div class="box">
-
+                        <div class="l">
+                            <div class="b">
+                                <div class="title">CONTACT US</div>
+                                <div class="item-box">
+                                    <div>
+                                        Chengdu Gauss Power
+                                        Art Co.,Ltd
+                                    </div>
+                                    <div>Mob：+860283928272</div>
+                                    <div>Email：dkjfi@163.com</div>
+                                    <div>
+                                        Add：Room 1415, Floor
+                                        14th,Unit 1 Building 2
+                                        Wanda SquareQingyang
+                                        district, Chengdu China
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="r">
+                            <div class="p-list">
+                                <el-form size="medium" :model="ruleForm" :rules="rules" ref="ruleForm"
+                                         label-width="140px"
+                                         class="demo-ruleForm">
+                                    <el-form-item label="Your Name：" prop="name">
+                                        <el-input v-model="ruleForm.name"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Company：" prop="company">
+                                        <el-input v-model="ruleForm.company"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Email：" prop="email">
+                                        <el-input v-model="ruleForm.email"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Phone：" prop="phone">
+                                        <el-input v-model="ruleForm.phone"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Subject：" prop="subject">
+                                        <el-input v-model="ruleForm.subject"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Your Message：" prop="message">
+                                        <el-input :autosize="{ minRows: 4}" type="textarea"
+                                                  v-model="ruleForm.message"></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <img
+                                                @click="submitForm('ruleForm')"
+                                                style="width:245px;height: 56px;margin-left: 54px;"
+                                                src="../../../public/img/send-message.png"
+                                        >
+                                    </el-form-item>
+                                </el-form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,10 +99,41 @@
     },
     name: 'contact',
     data () {
-      return {}
+      return {
+        ruleForm: {
+          name: '',
+          company: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+        },
+        rules: {
+          email: [
+            { required: true, message: 'Please enter your email', trigger: 'blur' },
+          ],
+          message: [
+            { required: true, message: 'Please enter your message', trigger: 'blur' },
+          ]
+        }
+      }
     },
     computed: {},
-    methods: {},
+    methods: {
+      submitForm (formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!')
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
+      },
+      resetForm (formName) {
+        this.$refs[formName].resetFields()
+      }
+    },
     beforeCreate () {
 
     },
@@ -66,6 +149,7 @@
     .home-page {
         .banner-box {
             position: relative;
+
             .fix-img-box {
                 position: absolute;
                 top: 0;
@@ -79,25 +163,76 @@
             }
         }
 
+        .pro-bg {
+            background-image: url("../../../public/img/bg02.png");
+            background-size: 100% 750px;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+        }
+
         .logo-bg {
             background-image: url("../../../public/img/bg01.png");
             background-repeat: no-repeat;
-            background-position: 0 100%;
+            background-position: 0 calc(100% - 50px);
             background-size: 255px;
-            margin-bottom: 50px;
         }
+
         .contain {
             margin-left: 140px;
+
             .nav-pos {
                 padding: 80px 0;
-                font-size:33px;
-                font-family:BebasNeueRegular;
-                font-weight:400;
-                color:rgba(85,85,85,1);
+                font-size: 33px;
+                font-family: BebasNeueRegular;
+                font-weight: 400;
+                color: rgba(85, 85, 85, 1);
             }
+
             .box {
-                min-height: 900px;
-                border: 1px solid red;
+                min-height: 650px;
+                display: flex;
+                padding-bottom: 40px;
+
+                .l {
+                    width: 250px;
+                    padding-right: 16px;
+                    border-right: 1px dashed #D3D3D3;
+
+                    .b {
+                        .title {
+                            height: 68px;
+                            line-height: 68px;
+                            text-align: center;
+                            background: rgba(251, 164, 35, 1);
+                            font-size: 33px;
+                            font-family: BebasNeueRegular;
+                            font-weight: bold;
+                            color: rgba(23, 23, 23, 1);
+                        }
+
+                        .item-box {
+                            padding: 30px 0;
+
+                            div {
+                                font-size: 19px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
+                                margin-bottom: 30px;
+                                line-height: 1.6;
+                            }
+                        }
+                    }
+                }
+
+                .r {
+                    flex: 1;
+                    padding-left: 16px;
+
+                    .p-list {
+                        width: 540px;
+                    }
+                }
             }
         }
     }
