@@ -47,9 +47,15 @@
                                 <el-row>
                                     <el-col :span="24">
                                         <div class="p-item p-item-1">
-                                           <div class="title">OUR HISTORY</div>
+                                            <div class="title">OUR HISTORY</div>
                                             <div class="intro">
-                                                Chengdu Gauss Power Technology Co., Ltd.is a professional production-manufacturing enterprise specialized in cosplay costume design and peoduction. Our company has been established since 2014 to grow up to be a team of high-quality, united, hard-working and truth-seeking characters. We own an independent studio, professional team with ten years of experience in China;All the costumes are handmade, without any mass production.
+                                                Chengdu Gauss Power Technology Co., Ltd.is a professional
+                                                production-manufacturing enterprise specialized in cosplay costume
+                                                design and peoduction. Our company has been established since 2014 to
+                                                grow up to be a team of high-quality, united, hard-working and
+                                                truth-seeking characters. We own an independent studio, professional
+                                                team with ten years of experience in China;All the costumes are
+                                                handmade, without any mass production.
                                             </div>
                                             <el-image
                                                     class="fix-img"
@@ -58,7 +64,9 @@
                                         </div>
                                         <div class="p-item p-item-2">
                                             <div class="title">OUR TEAM</div>
-                                            <div class="intro">Our team has 10 years of experience in making props costumes and own designers, drafters, tailors and packing staff.</div>
+                                            <div class="intro">Our team has 10 years of experience in making props
+                                                costumes and own designers, drafters, tailors and packing staff.
+                                            </div>
                                             <el-image
                                                     class="fix-img"
                                                     src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
@@ -67,7 +75,9 @@
                                         <div class="p-item p-item-3">
                                             <div class="title">OUR PRODUCTS</div>
                                             <div class="intro">
-                                                Including Transformers costumes,Iron man costumes,Thanos costumes,Star wars costumes and other game roles.The all costumes can be customized as customers’ demands.
+                                                Including Transformers costumes,Iron man costumes,Thanos costumes,Star
+                                                wars costumes and other game roles.The all costumes can be customized as
+                                                customers’ demands.
                                             </div>
                                             <el-image
                                                     class="fix-img"
@@ -100,8 +110,20 @@
       pageFooter,
     },
     name: 'about',
+    metaInfo: {
+      title: 'My Example App', // set a title
+      meta: [{ // set meta
+        name: 'keyWords',
+        content: 'My Example App'
+      }],
+      link: [{ // set link
+        rel: 'asstes',
+        href: 'https://assets-cdn.github.com/'
+      }]
+    },
     data () {
-      return {}
+      return {
+      }
     },
     computed: {},
     methods: {},
@@ -120,6 +142,7 @@
     .home-page {
         .banner-box {
             position: relative;
+
             .fix-img-box {
                 position: absolute;
                 top: 0;
@@ -139,21 +162,25 @@
             background-repeat: no-repeat;
             background-position: center bottom;
         }
+
         .logo-bg {
             background-image: url("../../../public/img/bg01.png");
             background-repeat: no-repeat;
             background-position: 0 calc(100% - 50px);
             background-size: 255px;
         }
+
         .contain {
             margin-left: 140px;
+
             .nav-pos {
                 padding: 80px 0;
-                font-size:33px;
-                font-family:BebasNeueRegular;
-                font-weight:400;
-                color:rgba(85,85,85,1);
+                font-size: 33px;
+                font-family: BebasNeueRegular;
+                font-weight: 400;
+                color: rgba(85, 85, 85, 1);
             }
+
             .box {
                 min-height: 900px;
                 display: flex;
@@ -178,11 +205,12 @@
 
                         .item-box {
                             padding: 30px 0;
+
                             div {
-                                font-size:19px;
-                                font-family:PingFang SC;
-                                font-weight:bold;
-                                color:rgba(23,23,23,1);
+                                font-size: 19px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
                                 margin-bottom: 30px;
                                 line-height: 1.6;
                             }
@@ -193,8 +221,10 @@
                 .r {
                     flex: 1;
                     padding-left: 16px;
+
                     .p-list {
                         width: 540px;
+
                         .p-item {
                             &.p-item-1, &.p-item-3 {
                                 .title {
@@ -210,9 +240,11 @@
                                     }
                                 }
                             }
+
                             &.p-item-2 {
                                 .title {
                                     text-align: right;
+
                                     &:after {
                                         content: '';
                                         display: inline-block;
@@ -224,23 +256,27 @@
                                         background-color: @main-color;
                                     }
                                 }
+
                                 .intro {
                                     text-align: right;
                                 }
                             }
+
                             .title {
                                 font-weight: bold;
                                 font-size: 49px;
                                 position: relative;
                                 margin-bottom: 40px;
                             }
+
                             .intro {
-                                font-size:16px;
-                                font-family:PingFang SC;
-                                font-weight:bold;
-                                color:rgba(23,23,23,1);
+                                font-size: 16px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
                                 margin-bottom: 10px;
                             }
+
                             .fix-img {
                                 width: 100%;
                                 margin-bottom: 30px;

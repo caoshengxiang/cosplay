@@ -12,20 +12,24 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      // name: 'HelloWorld',
-      // component: HelloWorld
       name: 'root',
       redirect: '/web/home',
     },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   component: () => import('./views/login/signin'),
-    //   meta: {
-    //     title: '登录',
-    //     authKey: false,
-    //   },
-    // },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./views/login/signin'),
+      meta: {
+        title: '登录',
+        authKey: false,
+      },
+    },
+    {
+      path: '/test/:id',
+      name: 'test',
+      component: () => import('./views/test/test'),
+      meta: {},
+    },
     {
       path: '/web',
       name: 'web',
@@ -91,11 +95,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    document.title = to.meta.title // 在路由里面写入的meta里面的title字段
-  } else {
-    document.title = 'cosplay'
-  }
   if (to.meta.authKey) {
     let authKey = VueCookies.get('authKey')
     if (authKey) {
