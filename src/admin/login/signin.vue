@@ -74,13 +74,13 @@
             } else {
               this.$webStorage.setItem('cacheUser', '')
             }
-            API.account.login({user: this.formData.username, password: pwd}).then(
+            API.account.login({account: this.formData.username, password: pwd}).then(
               (res) => {
                 if (res.status) {
                   this.$webStorage.setItem('userInfo', res.data)
                   this.$VueCookies.set('authKey', res.data.authKey, 2 * 60 * 60) // 时效2小时
                   // this.$VueCookies.remove('authKey') // 时效2小时
-                  this.$router.push({ name: 'home' })
+                  this.$router.push({ name: 'productAdmin' })
                 }
                 this.dataLoading = false
               })

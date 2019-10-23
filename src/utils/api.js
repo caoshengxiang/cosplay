@@ -17,9 +17,7 @@ export default {
   account: {
     login (params) {
       return new Promise((resolve, reject) => {
-        $axios.get('user/login', {
-          params: params,
-        }).then((res) => {
+        $axios.post('users/login', params).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))

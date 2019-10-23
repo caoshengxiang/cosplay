@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routerV from './components/routerV'
+import routerViewAdmin from './components/routerViewAdmin'
 import VueCookies from 'vue-cookies'
 
 Vue.use(Router)
@@ -16,19 +17,74 @@ const router = new Router({
       redirect: '/web/home',
     },
     {
-      path: '/login',
+      path: '/test/:id',
+      name: 'test',
+      component: () => import('./views/test/test'),
+      meta: {},
+    },
+    {
+      path: '/admin/login',
       name: 'login',
-      component: () => import('./views/login/signin'),
+      component: () => import('./admin/login/signin'),
       meta: {
         title: '登录',
         authKey: false,
       },
     },
     {
-      path: '/test/:id',
-      name: 'test',
-      component: () => import('./views/test/test'),
-      meta: {},
+      path: '/admin',
+      name: 'admin',
+      component: routerViewAdmin,
+      children: [
+        {
+          path: 'product',
+          name: 'productAdmin',
+          component: () => import('./admin/product/product'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
+          path: 'product/detail',
+          name: 'productDetailAdmin',
+          component: () => import('./admin/product/productDetail'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
+          path: 'news',
+          name: 'newsAdmin',
+          component: () => import('./admin/news/news'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
+          path: 'faqs',
+          name: 'faqsAdmin',
+          component: () => import('./admin/faqs/faqs'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
+          path: 'banner',
+          name: 'bannerAdmin',
+          component: () => import('./admin/banner/banner'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
+          path: 'params',
+          name: 'paramsAdmin',
+          component: () => import('./admin/params/params'),
+          meta: {
+            authKey: true
+          },
+        },
+      ]
     },
     {
       path: '/web',
