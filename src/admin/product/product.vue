@@ -8,12 +8,24 @@
         </div>
         <div class="com-page-box">
             <div class="com-page-bar">
-<!--                <span>手机号：<el-input style="width: 200px" v-model="form.phone" clearable></el-input></span>-->
-<!--                <span style="margin-left: 20px">是否正常停车<el-select v-model="form.is" placeholder="请选择" clearable>-->
-<!--            <el-option label="是" value="1"></el-option>-->
-<!--            <el-option label="否" value="2"></el-option>-->
-<!--          </el-select></span>-->
-                <el-button @click="setLoading" style="width: 120px;margin-left: 20px" type="primary">查询</el-button>
+                <div class="com-page-search">
+                    <div class="search-item">产品名称：
+                        <el-input style="width: 200px" v-model="searchForm.title" clearable></el-input>
+                    </div>
+                    <div class="search-item">
+                        <el-select v-model="searchForm.productType" placeholder="请选择分类" clearable>
+                            <el-option label="是" value="1"></el-option>
+                            <el-option label="否" value="2"></el-option>
+                        </el-select>
+                    </div>
+                    <div class="search-item">
+                        <el-button @click="getData" style="width: 120px;margin-left: 20px" type="primary">查询
+                        </el-button>
+                    </div>
+                </div>
+                <div class="com-page-opt">
+                    <el-button @click="addData" style="width: 120px;margin-left: 20px" type="primary">添加</el-button>
+                </div>
             </div>
             <div class="com-page-con">
                 <el-table
@@ -26,7 +38,7 @@
                     >
                     </el-table-column>
                     <el-table-column
-                            prop="productType"
+                            prop="productCateName"
                             label="产品分类"
                     >
                     </el-table-column>
@@ -43,7 +55,8 @@
                             label="操作"
                             width="100">
                         <template slot-scope="scope">
-                            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                            <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+                            <el-button @click="handleDelClick(scope.row)" type="text" size="small">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -53,10 +66,10 @@
                             @size-change="handleSizeChange"
                             @current-change="handleCurrentChange"
                             :current-page="currentPage"
-                            :page-sizes="[100, 200, 300, 400]"
-                            :page-size="100"
+                            :page-sizes="pageSizes"
+                            :page-size="pageSize"
                             layout="total, sizes, prev, pager, next, jumper"
-                            :total="400">
+                            :total="total">
                     </el-pagination>
                 </div>
             </div>
@@ -65,56 +78,82 @@
 </template>
 
 <script>
+  import API from '../../utils/api'
+
   export default {
     name: 'product',
     data () {
       return {
         loading: false,
         currentPage: 1,
-        searchform: {
-          phone: '',
-          is: '',
+        pageSizes: [10, 20],
+        pageSize: 10,
+        searchForm: {
+          title: '',
+          productType: '',
         },
-        tableData: [
-          {
-            id: 1,
-            t1: 1,
-            t2: '13847561523',
-            t3: '2019-10-14  09:10:25',
-            t4: '天府三街停车点',
-            t5: '2019-10-14  09:30:28',
-            t6: 'OCG国际中心停车点',
-            t7: '否',
-            t8: '乱停乱放',
-            t9: '信息上报芝麻信用进行处理'
-          },
-        ]
+        tableData: [],
+        total: 0,
       }
     },
     methods: {
       handleSizeChange (val) {
         console.log(`每页 ${val} 条`)
         this.currentPage = 1
+        this.pageSize = val
         this.handleCurrentChange(this.currentPage)
       },
       handleCurrentChange (val) {
         this.currentPage = val
         console.log(`当前页: ${val}`)
-        this.setLoading()
+        this.getData()
       },
       handleClick (row) {
-        this.$router.push({name: 'productDetailAdmin', query: {id: row.id}})
+        this.$router.push({ name: 'productDetailAdmin', query: { _id: row._id } })
       },
-      setLoading (callback) {
+      handleDelClick (row) {
+        console.log(row)
+        this.$confirm('此操作将永久删, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          API.product.del({_id: row._id}).then((da) => {
+            if (da.status) {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              })
+              this.getData()
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+      },
+      addData () {
+        this.$router.push({ name: 'productDetailAdmin' })
+      },
+      getData (callback) {
         this.loading = true
-        setTimeout(() => {
-          this.loading = false
-          callback && callback()
-        }, 2000)
+        API.product.list(Object.assign({}, this.searchForm, {
+          page: this.currentPage,
+          size: this.pageSize
+        })).then(da => {
+          this.tableData = da.data.data
+          this.total = da.data.total
+          setTimeout(() => {
+            this.loading = false
+            callback && callback()
+          }, 200)
+        })
       }
     },
     created () {
-      this.setLoading()
+      this.getData()
     }
   }
 </script>

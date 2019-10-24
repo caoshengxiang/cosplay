@@ -3,7 +3,7 @@
         <div class="com-page-pos">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>产品管理</el-breadcrumb-item>
+                <el-breadcrumb-item>新闻管理</el-breadcrumb-item>
                 <el-breadcrumb-item>详情</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -11,7 +11,7 @@
             <div class="com-page-bar"></div>
             <div class="com-page-con">
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                    <el-form-item label="产品名称" prop="title">
+                    <el-form-item label="标题" prop="title">
                         <el-input v-model="ruleForm.title"></el-input>
                     </el-form-item>
                     <el-form-item label="简介" prop="sub">
@@ -19,18 +19,6 @@
                     </el-form-item>
                     <el-form-item label="详细介绍" prop="content">
                         <el-input type="textarea" v-model="ruleForm.content"></el-input>
-                    </el-form-item>
-                    <el-form-item label="产品分类" prop="productCateName">
-                        <el-select v-model="ruleForm.productCateName" placeholder="请选择产品分类名称">
-                            <el-option label="区域一" value="shanghai"></el-option>
-                            <el-option label="区域二" value="beijing"></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="列表图" prop="listImg">
-
-                    </el-form-item>
-                    <el-form-item label="详情图片" prop="detailImgs">
-
                     </el-form-item>
                     <el-form-item label="权重" prop="weight">
                         <el-input type="number" v-model.number="ruleForm.weight"></el-input>
@@ -42,7 +30,7 @@
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
                         <el-button @click="resetForm('ruleForm')">重置</el-button>
                     </el-form-item>
                 </el-form>
@@ -53,9 +41,8 @@
 
 <script>
   import API from '../../utils/api'
-
   export default {
-    name: 'productDetail',
+    name: 'newsDetail',
     data () {
       return {
         loading: false,
@@ -63,11 +50,8 @@
           title: '',
           sub: '',
           content: '',
-          productCateName: '',
-          listImg: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-          detailImgs: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg,https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
           weight: 0,
-          status: 1,
+          status: 1
         },
         rules: {
           title: [
@@ -103,17 +87,17 @@
           if (valid) {
             this.loading = true
             if (this.$route.query._id) { // 编辑
-                API.product.update(this.ruleForm).then(da => {
-                  if (da.status) {
-                    this.$message.success('编辑成功')
-                    this.$router.push({name: 'productAdmin'})
-                  }
-                })
+              API.news.update(this.ruleForm).then(da => {
+                if (da.status) {
+                  this.$message.success('编辑成功')
+                  this.$router.push({name: 'newsAdmin'})
+                }
+              })
             } else {
-              API.product.add(this.ruleForm).then(da => {
+              API.news.add(this.ruleForm).then(da => {
                 if (da.status) {
                   this.$message.success('添加成功')
-                  this.$router.push({name: 'productAdmin'})
+                  this.$router.push({name: 'newsAdmin'})
                 }
                 setTimeout(() => {
                   this.loading = false
@@ -134,7 +118,7 @@
           return
         }
         this.loading = true
-        API.product.detail({ _id: this.$route.query._id }).then(da => {
+        API.news.detail({ _id: this.$route.query._id }).then(da => {
           this.ruleForm = da.data
           setTimeout(() => {
             this.loading = false

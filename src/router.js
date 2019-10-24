@@ -61,6 +61,14 @@ const router = new Router({
           },
         },
         {
+          path: 'news/detail',
+          name: 'newsDetailAdmin',
+          component: () => import('./admin/news/newsDetail'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
           path: 'faqs',
           name: 'faqsAdmin',
           component: () => import('./admin/faqs/faqs'),
@@ -69,9 +77,25 @@ const router = new Router({
           },
         },
         {
+          path: 'faqs/detail',
+          name: 'faqsDetailAdmin',
+          component: () => import('./admin/faqs/faqsDetail'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
           path: 'banner',
           name: 'bannerAdmin',
           component: () => import('./admin/banner/banner'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
+          path: 'banner/detail',
+          name: 'bannerDetailAdmin',
+          component: () => import('./admin/banner/bannerDetail'),
           meta: {
             authKey: true
           },

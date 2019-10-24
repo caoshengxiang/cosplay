@@ -35,14 +35,14 @@ $axios.interceptors.response.use((response) => {
       setTimeout(() => {
         Message.error(response.data.data.error)
       }, 0)
-      // setTimeout(() => {
-      //   if (response.data.error.statusCode === '10007') { // 未登录，10007登录过期
-      //     // 后台返回得登录过期，重置登录状态
-      //     $router.push({name: 'error'})
-      //     VueCookies.remove('authKey')
-      //     webStorage.removeItem('userInfo')
-      //   }
-      // }, 1000)
+      setTimeout(() => {
+        if (response.data.error.statusCode === '10007') { // 未登录，10007登录过期
+          // 后台返回得登录过期，重置登录状态
+          $router.push({name: 'error'})
+          VueCookies.remove('authKey')
+          webStorage.removeItem('userInfo')
+        }
+      }, 1000)
     }
   }
   return Promise.resolve(response)

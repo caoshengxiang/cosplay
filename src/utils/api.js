@@ -25,19 +25,32 @@ export default {
       })
     },
     logout (params) {
-      return new Promise((resolve, reject) => {
-        $axios.get('user/logout', {
-          params: params,
-        }).then((res) => {
-          resolve(res.data)
-        }).catch((err) => {
-          reject(new Error(err))
-        })
-      })
+      // return new Promise((resolve, reject) => {
+      //   $axios.get('user/logout', {
+      //     params: params,
+      //   }).then((res) => {
+      //     resolve(res.data)
+      //   }).catch((err) => {
+      //     reject(new Error(err))
+      //   })
+      // })
     },
     updatePwd (params) {
+      // return new Promise((resolve, reject) => {
+      //   $axios.get('user/password/edit', {
+      //     params: params,
+      //   }).then((res) => {
+      //     resolve(res.data)
+      //   }).catch((err) => {
+      //     reject(new Error(err))
+      //   })
+      // })
+    },
+  },
+  product: {
+    list (params) {
       return new Promise((resolve, reject) => {
-        $axios.get('user/password/edit', {
+        $axios.get('product/list', {
           params: params,
         }).then((res) => {
           resolve(res.data)
@@ -46,11 +59,9 @@ export default {
         })
       })
     },
-  },
-  code: {
-    list (params) {
+    detail (params) {
       return new Promise((resolve, reject) => {
-        $axios.get('auth', {
+        $axios.get('product/detail', {
           params: params,
         }).then((res) => {
           resolve(res.data)
@@ -61,29 +72,36 @@ export default {
     },
     add (params) {
       return new Promise((resolve, reject) => {
-        $axios.post('auth',
-          params
-        ).then((res) => {
+        $axios.post('product/add', params).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
         })
       })
     },
-    edit (params) {
+    del (params) {
       return new Promise((resolve, reject) => {
-        $axios.put(`auth/${params.id}`,
-          params
-        ).then((res) => {
+        $axios.delete('product/delete', {params: params}).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
         })
       })
     },
-    delete (params) {
+    update (params) {
       return new Promise((resolve, reject) => {
-        $axios.delete(`auth/${params.id}`, {
+        $axios.put(`product/update/${params._id}`, params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+  },
+  news: {
+    list (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('news/list', {
           params: params,
         }).then((res) => {
           resolve(res.data)
@@ -92,5 +110,196 @@ export default {
         })
       })
     },
-  }
+    detail (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('news/detail', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    add (params) {
+      return new Promise((resolve, reject) => {
+        $axios.post('news/add', params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    del (params) {
+      return new Promise((resolve, reject) => {
+        $axios.delete('news/delete', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    update (params) {
+      return new Promise((resolve, reject) => {
+        $axios.put(`news/update/${params._id}`, params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+  },
+  faqs: {
+    list (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('faqs/list', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    detail (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('faqs/detail', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    add (params) {
+      return new Promise((resolve, reject) => {
+        $axios.post('faqs/add', params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    del (params) {
+      return new Promise((resolve, reject) => {
+        $axios.delete('faqs/delete', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    update (params) {
+      return new Promise((resolve, reject) => {
+        $axios.put(`faqs/update/${params._id}`, params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+  },
+  banner: {
+    list (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('banner/list', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    detail (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('banner/detail', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    add (params) {
+      return new Promise((resolve, reject) => {
+        $axios.post('banner/add', params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    del (params) {
+      return new Promise((resolve, reject) => {
+        $axios.delete('banner/delete', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    update (params) {
+      return new Promise((resolve, reject) => {
+        $axios.put(`banner/update/${params._id}`, params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+  },
+  params: {
+    list (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('params/list', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    detail (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('params/detail', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    add (params) {
+      return new Promise((resolve, reject) => {
+        $axios.post('params/add', params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    del (params) {
+      return new Promise((resolve, reject) => {
+        $axios.delete('params/delete', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    update (params) {
+      return new Promise((resolve, reject) => {
+        $axios.put(`params/update/${params._id}`, params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+  },
 }

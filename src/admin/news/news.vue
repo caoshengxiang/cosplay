@@ -3,17 +3,26 @@
         <div class="com-page-pos">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>骑行人记录</el-breadcrumb-item>
+                <el-breadcrumb-item>新闻管理</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="com-page-box">
             <div class="com-page-bar">
-                <!--                <span>手机号：<el-input style="width: 200px" v-model="form.phone" clearable></el-input></span>-->
-                <!--                <span style="margin-left: 20px">是否正常停车<el-select v-model="form.is" placeholder="请选择" clearable>-->
-                <!--            <el-option label="是" value="1"></el-option>-->
-                <!--            <el-option label="否" value="2"></el-option>-->
-                <!--          </el-select></span>-->
-                <el-button @click="setLoading" style="width: 120px;margin-left: 20px" type="primary">查询</el-button>
+                <div class="com-page-bar">
+                    <div class="com-page-search">
+                        <div class="search-item">产品名称：
+                            <el-input style="width: 200px" v-model="searchForm.title" clearable></el-input>
+                        </div>
+                        <div class="search-item">
+                            <el-button @click="getData" style="width: 120px;margin-left: 20px" type="primary">查询
+                            </el-button>
+                        </div>
+                    </div>
+                    <div class="com-page-opt">
+                        <el-button @click="addData" style="width: 120px;margin-left: 20px" type="primary">添加
+                        </el-button>
+                    </div>
+                </div>
             </div>
             <div class="com-page-con">
                 <el-table
@@ -21,42 +30,31 @@
                         border
                         style="width: 100%">
                     <el-table-column
-                            prop="t1"
-                            label="序号"
+                            prop="title"
+                            label="标题"
                     >
                     </el-table-column>
                     <el-table-column
-                            prop="t2"
-                            label="手机号"
+                            prop="created"
+                            label="创建时间"
                     >
                     </el-table-column>
                     <el-table-column
-                            prop="t3"
-                            label="使用开始时间">
+                            prop="sub"
+                            label="简介">
                     </el-table-column>
                     <el-table-column
-                            prop="t4"
-                            label="开始骑行停车点">
+                            prop="status"
+                            label="状态">
                     </el-table-column>
                     <el-table-column
-                            prop="t5"
-                            label="使用结束时间">
-                    </el-table-column>
-                    <el-table-column
-                            prop="t6"
-                            label="结束骑行停车点">
-                    </el-table-column>
-                    <el-table-column
-                            prop="t7"
-                            label="是否正常停车">
-                    </el-table-column>
-                    <el-table-column
-                            prop="t8"
-                            label="原因">
-                    </el-table-column>
-                    <el-table-column
-                            prop="t9"
-                            label="处理结果">
+                            fixed="right"
+                            label="操作"
+                            width="100">
+                        <template slot-scope="scope">
+                            <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+                            <el-button @click="handleDelClick(scope.row)" type="text" size="small">删除</el-button>
+                        </template>
                     </el-table-column>
                 </el-table>
                 <div style="padding-top: 20px;text-align: right">
@@ -65,10 +63,10 @@
                             @size-change="handleSizeChange"
                             @current-change="handleCurrentChange"
                             :current-page="currentPage"
-                            :page-sizes="[100, 200, 300, 400]"
-                            :page-size="100"
+                            :page-sizes="pageSizes"
+                            :page-size="pageSize"
                             layout="total, sizes, prev, pager, next, jumper"
-                            :total="400">
+                            :total="total">
                     </el-pagination>
                 </div>
             </div>
@@ -77,52 +75,80 @@
 </template>
 
 <script>
+  import API from '../../utils/api'
   export default {
     name: 'news',
     data () {
       return {
         loading: false,
         currentPage: 1,
-        searchform: {
-          phone: '',
-          is: '',
+        pageSizes: [10, 20],
+        pageSize: 10,
+        searchForm: {
+          title: '',
         },
-        tableData: [
-          {
-            t1: 1,
-            t2: '13847561523',
-            t3: '2019-10-14  09:10:25',
-            t4: '天府三街停车点',
-            t5: '2019-10-14  09:30:28',
-            t6: 'OCG国际中心停车点',
-            t7: '否',
-            t8: '乱停乱放',
-            t9: '信息上报芝麻信用进行处理'
-          },
-        ]
+        tableData: [],
+        total: 0,
       }
     },
     methods: {
       handleSizeChange (val) {
         console.log(`每页 ${val} 条`)
         this.currentPage = 1
+        this.pageSize = val
         this.handleCurrentChange(this.currentPage)
       },
       handleCurrentChange (val) {
         this.currentPage = val
         console.log(`当前页: ${val}`)
-        this.setLoading()
+        this.getData()
       },
-      setLoading (callback) {
+      handleClick (row) {
+        this.$router.push({ name: 'newsDetailAdmin', query: { _id: row._id } })
+      },
+      handleDelClick (row) {
+        console.log(row)
+        this.$confirm('此操作将永久删, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          API.news.del({_id: row._id}).then((da) => {
+            if (da.status) {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              })
+              this.getData()
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+      },
+      addData () {
+        this.$router.push({ name: 'newsDetailAdmin' })
+      },
+      getData (callback) {
         this.loading = true
-        setTimeout(() => {
-          this.loading = false
-          callback && callback()
-        }, 2000)
+        API.news.list(Object.assign({}, this.searchForm, {
+          page: this.currentPage,
+          size: this.pageSize
+        })).then(da => {
+          this.tableData = da.data.data
+          this.total = da.data.total
+          setTimeout(() => {
+            this.loading = false
+            callback && callback()
+          }, 200)
+        })
       }
     },
     created () {
-      this.setLoading()
+      this.getData()
     }
   }
 </script>
