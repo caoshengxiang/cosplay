@@ -13,9 +13,8 @@
                         <el-input style="width: 200px" v-model="searchForm.title" clearable></el-input>
                     </div>
                     <div class="search-item">
-                        <el-select v-model="searchForm.productType" placeholder="请选择分类" clearable>
-                            <el-option label="是" value="1"></el-option>
-                            <el-option label="否" value="2"></el-option>
+                        <el-select v-model="searchForm.productCateName" placeholder="请选择分类" clearable>
+                            <el-option v-for="(item, index) in productTypeList" :key="index" :label="item.name" :value="item.name"></el-option>
                         </el-select>
                     </div>
                     <div class="search-item">
@@ -45,10 +44,17 @@
                     <el-table-column
                             prop="created"
                             label="创建时间">
+                        <template slot-scope="scope">
+                            {{$moment(scope.row.created)}}
+                        </template>
                     </el-table-column>
                     <el-table-column
                             prop="status"
                             label="状态">
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.status === 1">上线</span>
+                            <span v-if="scope.row.status === 2">下线</span>
+                        </template>
                     </el-table-column>
                     <el-table-column
                             fixed="right"
@@ -90,10 +96,11 @@
         pageSize: 10,
         searchForm: {
           title: '',
-          productType: '',
+          productCateName: '',
         },
         tableData: [],
         total: 0,
+        productTypeList: [],
       }
     },
     methods: {
@@ -150,10 +157,19 @@
             callback && callback()
           }, 200)
         })
+      },
+      getProductType () {
+        API.params.list(Object.assign({}, this.searchForm, {
+          page: 1,
+          size: 10000
+        })).then(da => {
+          this.productTypeList = da.data.data
+        })
       }
     },
     created () {
       this.getData()
+      this.getProductType()
     }
   }
 </script>

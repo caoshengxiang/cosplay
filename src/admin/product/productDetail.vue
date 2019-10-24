@@ -21,9 +21,8 @@
                         <el-input type="textarea" v-model="ruleForm.content"></el-input>
                     </el-form-item>
                     <el-form-item label="产品分类" prop="productCateName">
-                        <el-select v-model="ruleForm.productCateName" placeholder="请选择产品分类名称">
-                            <el-option label="区域一" value="shanghai"></el-option>
-                            <el-option label="区域二" value="beijing"></el-option>
+                        <el-select v-model="ruleForm.productCateName" placeholder="请选择分类" clearable>
+                            <el-option v-for="(item, index) in productTypeList" :key="index" :label="item.name" :value="item.name"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="列表图" prop="listImg">
@@ -94,7 +93,8 @@
           status: [
             { required: true, message: '请选择', trigger: 'change' }
           ],
-        }
+        },
+        productTypeList: [],
       }
     },
     methods: {
@@ -142,9 +142,18 @@
           }, 200)
         })
       },
+      getProductType () {
+        API.params.list(Object.assign({}, this.searchForm, {
+          page: 1,
+          size: 10000
+        })).then(da => {
+          this.productTypeList = da.data.data
+        })
+      }
     },
     created () {
       this.getDetail()
+      this.getProductType()
     }
   }
 </script>

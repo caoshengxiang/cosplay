@@ -42,6 +42,10 @@
                     <el-table-column
                             prop="status"
                             label="状态">
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.status === 1">上线</span>
+                            <span v-if="scope.row.status === 2">下线</span>
+                        </template>
                     </el-table-column>
                     <el-table-column
                             prop="weight"
@@ -50,6 +54,9 @@
                     <el-table-column
                             prop="created"
                             label="创建时间">
+                        <template slot-scope="scope">
+                            {{$moment(scope.row.created)}}
+                        </template>
                     </el-table-column>
                     <el-table-column
                             fixed="right"

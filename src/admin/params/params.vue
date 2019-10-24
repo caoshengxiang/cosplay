@@ -34,6 +34,9 @@
                                 prop="flag"
                                 label="参数名称"
                         >
+                            <template slot-scope="scope">
+                                <span v-if="scope.row.flag === 1">产品分类</span>
+                            </template>
                         </el-table-column>
                         <el-table-column
                                 prop="name"
@@ -43,6 +46,9 @@
                         <el-table-column
                                 prop="created"
                                 label="创建时间">
+                            <template slot-scope="scope">
+                                {{$moment(scope.row.created)}}
+                            </template>
                         </el-table-column>
                         <el-table-column
                                 fixed="right"

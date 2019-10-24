@@ -47,10 +47,21 @@
                                 prop="flag"
                                 label="banner位置"
                         >
+                            <template slot-scope="scope">
+                                <span v-if="scope.row.flag == 1">首页</span>
+                                <span v-if="scope.row.flag == 2">产品页</span>
+                                <span v-if="scope.row.flag == 3">新闻页</span>
+                                <span v-if="scope.row.flag == 4">faqs页</span>
+                                <span v-if="scope.row.flag == 5">about页</span>
+                                <span v-if="scope.row.flag == 6">联系页</span>
+                            </template>
                         </el-table-column>
                         <el-table-column
                                 prop="created"
                                 label="创建时间">
+                            <template slot-scope="scope">
+                                {{$moment(scope.row.created)}}
+                            </template>
                         </el-table-column>
 <!--                        <el-table-column-->
 <!--                                prop="status"-->
