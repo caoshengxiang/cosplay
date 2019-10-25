@@ -59,7 +59,7 @@
       </div>
     </div>
 
-    <el-dialog title="配置" :visible.sync="dialogFormVisible">
+    <el-dialog title="配置" :visible.sync="dialogFormVisible" :destroy-on-close="true">
       <el-form :model="formData" v-loading="formLoading"
                element-loading-text="处理中...">
         <!--        <el-form-item label="人员姓名" label-width="120px">-->

@@ -14,7 +14,7 @@
                             Qingyang district, Chengdu China
                         </div>
                     </el-col>
-                    <el-col span="6" class="col-2">
+                    <el-col :span="6" class="col-2">
                         <div class="title">Navigation</div>
                         <div>
                             <router-link :to="{name: 'product'}">Product</router-link>
@@ -32,28 +32,14 @@
                             <router-link :to="{name: 'contact'}">Contct</router-link>
                         </div>
                     </el-col>
-                    <el-col span="6" class="col-2">
+                    <el-col :span="6" class="col-2">
                         <div class="title">Categories</div>
-                        <div>
-                            <router-link :to="{name: 'product'}">Tansformers Costumes</router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{name: 'news'}">Iron Man Costumes</router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{name: 'faqs'}">Narvel Cosplay Costumes</router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{name: 'about'}">DC Cosplay Costumes</router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{name: 'contact'}">Star Wars Costumes</router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{name: 'contact'}">Alien VS Predator Costumes</router-link>
+                        <div v-for="(item, index) in productCateList_6" :key="index">
+                            <router-link :to="{name: 'product', query: {productCateName: item.name}}">{{item.name}}
+                            </router-link>
                         </div>
                     </el-col>
-                    <el-col span="6" class="col-4">
+                    <el-col :span="6" class="col-4">
                         <div class="title">Contact Us</div>
                         <div class="text">
                             We offer not only priducts,but also
@@ -61,7 +47,7 @@
                             ontact us to know more
                         </div>
                         <div class="contact">
-                            <el-button>contact us</el-button>
+                            <router-link :to="{name: 'contact'}"><el-button>contact us</el-button></router-link>
                         </div>
                     </el-col>
                 </el-row>
@@ -72,8 +58,29 @@
 </template>
 
 <script>
+  import API from '../utils/api'
+
   export default {
-    name: 'pageFooter'
+    name: 'pageFooter',
+    data () {
+      return {
+        productCateList_6: []
+      }
+    },
+    methods: {
+      getProductCateList_6 () {
+        API.params.list(Object.assign({}, {
+          page: 1,
+          size: 6,
+          flag: 1,
+        })).then(da => {
+          this.productCateList_6 = da.data.data
+        })
+      }
+    },
+    created () {
+      this.getProductCateList_6()
+    }
   }
 </script>
 
@@ -84,6 +91,7 @@
         a {
             color: #ffffff;
         }
+
         .com-item-fill {
             background-image: url("../../public/img/footer-bg.png");
             background-position: center;

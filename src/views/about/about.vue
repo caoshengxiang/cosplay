@@ -5,23 +5,28 @@
         <!--      <div style="max-width: 300px;width: 100%;height:200px;border: 1px solid red;box-sizing: border-box;display: inline-block;">{{i+1}}</div>-->
         <!--    </el-col>-->
         <div class="banner-box">
-            <el-carousel :interval="5000" height="500px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <el-image style="height: 100%" fit="cover"
-                              src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"></el-image>
+            <el-carousel :interval="5000" height="500px" @change="carouselChange" :initial-index="initialIndex">
+                <el-carousel-item v-for="(item, index) in bannerList" :key="index">
+                    <a v-if="item.link" :href="item.link" target="_blank">
+                        <el-image style="height: 100%" fit="cover"
+                                  :src="item.imgUrl"></el-image>
+                    </a>
+                    <el-image v-else style="height: 100%" fit="cover"
+                              :src="item.imgUrl"></el-image>
                 </el-carousel-item>
             </el-carousel>
             <div class="fix-img-box">
                 <el-image
+                        v-if="bannerList[initialIndex] && bannerList[initialIndex].subImg"
                         class="fix-img"
-                        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                        fit="fit"></el-image>
+                        :src="bannerList[initialIndex].subImg"
+                        fit="contain"></el-image>
             </div>
         </div>
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
-                    <div class="nav-pos">HOME > PRODUCTS > Iron Man Costumes</div>
+                    <div class="nav-pos">HOME  >  ABOUT US</div>
                     <div class="box">
                         <div class="l">
                             <div class="b">
@@ -100,7 +105,7 @@
 
 <script>
   // @ is an alias to /src
-  // import API from '../../utils/api'
+  import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
 
@@ -111,7 +116,7 @@
     },
     name: 'about',
     metaInfo: {
-      title: 'My Example App', // set a title
+      title: 'ABOUT US', // set a title
       meta: [{ // set meta
         name: 'keyWords',
         content: 'My Example App'
@@ -123,14 +128,31 @@
     },
     data () {
       return {
+        bannerList: [],
+        initialIndex: 0,
       }
     },
     computed: {},
-    methods: {},
+    methods: {
+      getBanner () {
+        API.banner.list({
+          page: 1,
+          size: 100,
+          flag: 5, // banner位置，1.首页 2.产品页 3.新闻 4.faqs 5. about 6. 联系页面
+        }).then(da => {
+          this.bannerList = da.data.data
+        })
+      },
+      carouselChange (index) {
+        console.info(index)
+        this.initialIndex = index
+      },
+    },
     beforeCreate () {
 
     },
     created () {
+      this.getBanner()
     },
   }
 </script>

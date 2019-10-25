@@ -14,7 +14,7 @@
                         <el-input style="width: 200px" v-model="searchForm.title" clearable></el-input>
                     </div>
                     <div class="search-item">
-                        <el-select v-model="searchForm.flag" placeholder="请选择banner位置">
+                        <el-select v-model="searchForm.flag" placeholder="请选择banner位置" clearable>
                             <el-option label="首页" :value="1"></el-option>
                             <el-option label="产品页" :value="2"></el-option>
                             <el-option label="新闻页" :value="3"></el-option>
@@ -135,7 +135,7 @@
       return {
         loading: false,
         currentPage: 1,
-        pageSizes: [10, 20],
+        pageSizes: [5, 10, 20],
         pageSize: 10,
         searchForm: {
           title: '',

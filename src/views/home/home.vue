@@ -5,16 +5,21 @@
         <!--      <div style="max-width: 300px;width: 100%;height:200px;border: 1px solid red;box-sizing: border-box;display: inline-block;">{{i+1}}</div>-->
         <!--    </el-col>-->
         <div class="banner-box">
-            <el-carousel :interval="5000" height="500px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <el-image style="height: 100%" fit="cover"
-                              src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"></el-image>
+            <el-carousel :interval="5000" height="500px" @change="carouselChange" :initial-index="initialIndex">
+                <el-carousel-item v-for="(item, index) in bannerList" :key="index">
+                    <a v-if="item.link" :href="item.link" target="_blank">
+                        <el-image style="height: 100%" fit="cover"
+                                         :src="item.imgUrl"></el-image>
+                    </a>
+                    <el-image v-else style="height: 100%" fit="cover"
+                              :src="item.imgUrl"></el-image>
                 </el-carousel-item>
             </el-carousel>
             <div class="fix-img-box">
                 <el-image
+                        v-if="bannerList[initialIndex] && bannerList[initialIndex].subImg"
                         class="fix-img"
-                        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                        :src="bannerList[initialIndex].subImg"
                         fit="contain"></el-image>
             </div>
         </div>
@@ -27,23 +32,13 @@
                     <div class="title">PRODUCTS</div>
                     <div class="show-pro">
                         <el-image
+                                v-for="(item, index) in productList_4"
+                                :key="index"
                                 class="pro-img"
-                                src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                                fit="fill"></el-image>
-                        <el-image
-                                class="pro-img"
-                                src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                                fit="fill"></el-image>
-                        <el-image
-                                class="pro-img"
-                                src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                                fit="fill"></el-image>
-                        <el-image
-                                class="pro-img"
-                                src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                                :src="item.listImg"
                                 fit="fill"></el-image>
                     </div>
-                    <div class="pro-more">MORE+</div>
+                    <router-link :to="{name: 'product'}"><div class="pro-more">MORE+</div></router-link>
                 </div>
                 <div class="choose">
                     <div style="text-align: right">
@@ -91,7 +86,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="choose-more">MORE+</div>
+                    <router-link :to="{name: 'about'}"><div class="choose-more">MORE+</div></router-link>
                 </div>
             </div>
         </div>
@@ -111,34 +106,34 @@
                         <div class="line-4"></div>
                         <div class="l-yinhao">“</div>
                         <div class="faq-list">
-                            <div class="faq">
-                                <div class="index">1</div>
+                            <div class="faq" v-for="(item, index) in faqsList_4" :key="index">
+                                <div class="index">{{index + 1}}</div>
                                 <div class="text">
-                                    <div class="q">Q:The costumes are fit for adults or young?</div>
-                                    <div class="a">A.our all costumes fit for adults.</div>
+                                    <div class="q">{{item.q}}</div>
+                                    <div class="a">{{item.a}}</div>
                                 </div>
                             </div>
-                            <div class="faq">
-                                <div class="index">2</div>
-                                <div class="text">
-                                    <div class="q">Q:The costumes are fit for adults or young?</div>
-                                    <div class="a">A.our all costumes fit for adults.</div>
-                                </div>
-                            </div>
-                            <div class="faq">
-                                <div class="index">3</div>
-                                <div class="text">
-                                    <div class="q">Q:The costumes are fit for adults or young?</div>
-                                    <div class="a">A.our all costumes fit for adults.</div>
-                                </div>
-                            </div>
-                            <div class="faq">
-                                <div class="index">4</div>
-                                <div class="text">
-                                    <div class="q">Q:The costumes are fit for adults or young?</div>
-                                    <div class="a">A.our all costumes fit for adults.</div>
-                                </div>
-                            </div>
+<!--                            <div class="faq">-->
+<!--                                <div class="index">2</div>-->
+<!--                                <div class="text">-->
+<!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
+<!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="faq">-->
+<!--                                <div class="index">3</div>-->
+<!--                                <div class="text">-->
+<!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
+<!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="faq">-->
+<!--                                <div class="index">4</div>-->
+<!--                                <div class="text">-->
+<!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
+<!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                         <div class="r-yinhao">”</div>
                     </div>
@@ -153,25 +148,76 @@
 
 <script>
   // @ is an alias to /src
-  // import API from '../../utils/api'
+  import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
 
   export default {
+    metaInfo: {
+      title: 'HOME', // set a title
+      meta: [{ // set meta
+        name: 'keyWords',
+        content: 'My Example App'
+      }],
+      link: [{ // set link
+        rel: 'asstes',
+        href: 'https://assets-cdn.github.com/'
+      }]
+    },
     components: {
       headerBar,
       pageFooter,
     },
     name: 'home',
     data () {
-      return {}
+      return {
+        bannerList: [],
+        initialIndex: 0,
+        productList_4: [],
+        faqsList_4: [],
+      }
     },
     computed: {},
-    methods: {},
+    methods: {
+      getBanner () {
+        API.banner.list({
+          page: 1,
+          size: 100,
+          flag: 1, // banner位置，1.首页 2.产品页 3.新闻 4.faqs 5. about 6. 联系页面
+        }).then(da => {
+          this.bannerList = da.data.data
+        })
+      },
+      carouselChange (index) {
+        console.info(index)
+        this.initialIndex = index
+      },
+      getProductList_4 () {
+        API.product.list(Object.assign({}, {
+          page: 1,
+          size: 4,
+          status: 1,
+        })).then(da => {
+          this.productList_4 = da.data.data
+        })
+      },
+      getFaqsList_4 () {
+        API.faqs.list(Object.assign({}, {
+          page: 1,
+          size: 4,
+          status: 1,
+        })).then(da => {
+          this.faqsList_4 = da.data.data
+        })
+      },
+    },
     beforeCreate () {
 
     },
     created () {
+      this.getBanner()
+      this.getProductList_4()
+      this.getFaqsList_4()
     },
   }
 </script>
@@ -246,7 +292,8 @@
                 .pro-img {
                     margin-right: 32px;
                     width: 180px;
-                    height: 220px
+                    height: 220px;
+                    cursor: pointer;
                 }
             }
 
@@ -377,14 +424,16 @@
                 .faqs-box {
                     margin-left: 450px;
                     position: relative;
-                    .line-1{
+
+                    .line-1 {
                         position: absolute;
                         top: 220px;
                         width: 280px;
                         height: 1px;
                         border-bottom: 1px dashed #888888;
                     }
-                    .line-2{
+
+                    .line-2 {
                         position: absolute;
                         top: 220px;
                         left: 420px;
@@ -392,7 +441,8 @@
                         height: 1px;
                         border-bottom: 1px dashed #dedede;
                     }
-                    .line-3{
+
+                    .line-3 {
                         position: absolute;
                         left: 350px;
                         top: 80px;
@@ -400,7 +450,8 @@
                         height: 81px;
                         border-right: 1px dashed #888888;
                     }
-                    .line-4{
+
+                    .line-4 {
                         position: absolute;
                         left: 350px;
                         top: 161px + 120px;
@@ -408,6 +459,7 @@
                         height: 81px;
                         border-right: 1px dashed #dedede;
                     }
+
                     .l-yinhao {
                         width: 39px;
                         font-size: 102px;
@@ -431,19 +483,24 @@
 
                     .faq-list {
                         padding: 50px 0 20px 0;
+
                         .faq {
                             width: 300px;
                             height: 180px;
                             display: inline-block;
                             overflow: hidden;
-                          &:nth-of-type(1) {
+
+                            &:nth-of-type(1) {
                                 padding-right: 60px;
                             }
+
                             &:nth-of-type(2) {
                                 padding-left: 60px;
+
                                 .text {
                                 }
                             }
+
                             &:nth-of-type(3) {
                                 padding-right: 60px;
                                 margin-top: 40px;
@@ -453,21 +510,23 @@
                                 margin-top: 40px;
                                 padding-left: 60px;
                             }
+
                             .index {
-                                font-size:33px;
-                                font-family:BebasNeueRegular;
-                                font-weight:bold;
-                                color:rgba(23,23,23,1);
+                                font-size: 33px;
+                                font-family: BebasNeueRegular;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
                                 text-align: center;
                             }
 
                             .text {
-                                height:72px;
+                                height: 72px;
                                 width: 300px;
-                                font-size:16px;
-                                font-family:PingFang SC;
-                                font-weight:bold;
-                                color:rgba(23,23,23,1);
+                                font-size: 16px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
+
                                 .q {
                                 }
 

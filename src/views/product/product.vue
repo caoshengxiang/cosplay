@@ -5,32 +5,40 @@
         <!--      <div style="max-width: 300px;width: 100%;height:200px;border: 1px solid red;box-sizing: border-box;display: inline-block;">{{i+1}}</div>-->
         <!--    </el-col>-->
         <div class="banner-box">
-            <el-carousel :interval="5000" height="500px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <el-image style="height: 100%" fit="cover"
-                              src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"></el-image>
+            <el-carousel :interval="5000" height="500px" @change="carouselChange" :initial-index="initialIndex">
+                <el-carousel-item v-for="(item, index) in bannerList" :key="index">
+                    <a v-if="item.link" :href="item.link" target="_blank">
+                        <el-image style="height: 100%" fit="cover"
+                                  :src="item.imgUrl"></el-image>
+                    </a>
+                    <el-image v-else style="height: 100%" fit="cover"
+                              :src="item.imgUrl"></el-image>
                 </el-carousel-item>
             </el-carousel>
             <div class="fix-img-box">
                 <el-image
+                        v-if="bannerList[initialIndex] && bannerList[initialIndex].subImg"
                         class="fix-img"
-                        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                        fit="fit"></el-image>
+                        :src="bannerList[initialIndex].subImg"
+                        fit="contain"></el-image>
             </div>
         </div>
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
-                    <div class="nav-pos">HOME > PRODUCTS > Iron Man Costumes</div>
+                    <div class="nav-pos">HOME > PRODUCTS > {{productCateName}}</div>
                     <div class="box">
                         <div class="l">
                             <div class="b">
                                 <div class="title">PRODUCTS</div>
                                 <div class="item-box">
-                                    <div>Transformers Costumes</div>
-                                    <div>Iron Man Costumes</div>
-                                    <div>Marvel Cosplay Costumes</div>
-                                    <div>Other Cosplay Costumes</div>
+                                    <div
+                                            class="cate"
+                                            :class="{active: item.name === productCateName}"
+                                            @click="productCateHandle(item)"
+                                            v-for="(item, index) in productCateList"
+                                            :key="index">{{item.name}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="b">
@@ -54,20 +62,24 @@
                         <div class="r">
                             <div class="p-list">
                                 <el-row>
-                                    <el-col v-for="i in 12" :key="i" :span="6">
-                                        <div class="p-item">
+                                    <el-col v-for="(item, index) in tableData" :key="index" :span="6">
+                                        <div class="p-item" @click="toDetail(item)">
                                             <el-image
                                                     class="pro-img"
-                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                                                    :src="item.listImg"
                                                     fit="fit"></el-image>
-                                            <div class="name">New Bumblebee Cosplay Costume</div>
+                                            <div class="name">{{item.title}}</div>
                                         </div>
                                     </el-col>
                                 </el-row>
                                 <el-pagination
+                                        :hide-on-single-page="true"
+                                        @current-change="handleCurrentChange"
+                                        :current-page="currentPage"
+                                        :page-size="pageSize"
                                         background
                                         layout="prev, pager, next"
-                                        :total="1000">
+                                        :total="total">
                                 </el-pagination>
                             </div>
                         </div>
@@ -83,25 +95,105 @@
 
 <script>
   // @ is an alias to /src
-  // import API from '../../utils/api'
+  import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
 
   export default {
+    metaInfo: {
+      title: 'PRODUCT', // set a title
+      meta: [{ // set meta
+        name: 'keyWords',
+        content: 'My Example App'
+      }],
+      link: [{ // set link
+        rel: 'asstes',
+        href: 'https://assets-cdn.github.com/'
+      }]
+    },
     components: {
       headerBar,
       pageFooter,
     },
     name: 'product',
     data () {
-      return {}
+      return {
+        bannerList: [],
+        initialIndex: 0,
+        productCateList: [],
+        productCateName: '',
+        tableData: [],
+        total: 0,
+        currentPage: 1,
+        pageSize: 12,
+        loading: false,
+      }
     },
     computed: {},
-    methods: {},
+    methods: {
+      getBanner () {
+        API.banner.list({
+          page: 1,
+          size: 100,
+          flag: 2, // banner位置，1.首页 2.产品页 3.新闻 4.faqs 5. about 6. 联系页面
+        }).then(da => {
+          this.bannerList = da.data.data
+        })
+      },
+      carouselChange (index) {
+        console.info(index)
+        this.initialIndex = index
+      },
+      getProductCateList () {
+        API.params.list(Object.assign({}, {
+          page: 1,
+          size: 100,
+          flag: 1,
+        })).then(da => {
+          this.productCateList = da.data.data
+          if (this.$route.query.productCateName) {
+            this.productCateName = this.$route.query.productCateName
+          } else {
+            this.productCateName = da.data.data[0].name
+          }
+          this.getData()
+        })
+      },
+      productCateHandle (item) {
+        this.productCateName = item.name
+        this.handleCurrentChange(1)
+      },
+      getData (callback) {
+        this.loading = true
+        API.product.list(Object.assign({}, {
+          page: this.currentPage,
+          size: this.pageSize,
+          status: 1,
+          productCateName: this.productCateName
+        })).then(da => {
+          this.tableData = da.data.data
+          this.total = da.data.total
+          setTimeout(() => {
+            this.loading = false
+            callback && callback()
+          }, 200)
+        })
+      },
+      handleCurrentChange (val) {
+        this.currentPage = val
+        console.log(`当前页: ${val}`)
+        this.getData()
+      },
+      toDetail (item) {
+        this.$router.push({ name: 'productDetail', query: { _id: item._id } })
+      }
+    },
     beforeCreate () {
 
     },
     created () {
+      this.getProductCateList()
+      this.getBanner()
     },
   }
 </script>
@@ -133,6 +225,7 @@
             background-repeat: no-repeat;
             background-position: center bottom;
         }
+
         .logo-bg {
             background-image: url("../../../public/img/bg01.png");
             background-repeat: no-repeat;
@@ -175,13 +268,23 @@
 
                         .item-box {
                             padding: 30px 0;
+
                             div {
-                                font-size:19px;
-                                font-family:PingFang SC;
-                                font-weight:bold;
-                                color:rgba(23,23,23,1);
+                                font-size: 19px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
                                 margin-bottom: 30px;
                                 line-height: 1.6;
+                                cursor: pointer;
+
+                                &.cate:hover {
+                                    text-decoration: underline;
+                                }
+
+                                &.active {
+                                    color: rgba(251, 164, 35, 1);
+                                }
                             }
                         }
                     }
@@ -190,19 +293,23 @@
                 .r {
                     flex: 1;
                     padding-left: 16px;
+
                     .p-list {
                         .p-item {
                             width: 178px;
                             margin-bottom: 41px;
+                            cursor: pointer;
+
                             .pro-img {
                                 width: 178px;
                                 height: 229px;
                             }
+
                             .name {
-                                font-size:16px;
-                                font-family:PingFang SC;
-                                font-weight:bold;
-                                color:rgba(23,23,23,1);
+                                font-size: 16px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
                                 text-align: center;
                                 height: 42px;
                             }

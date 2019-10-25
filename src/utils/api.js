@@ -14,6 +14,16 @@
 import $axios from '../utils/axiosConfig' // axios配置文件
 
 export default {
+  common: {
+    upload (params, success, error) {
+      $axios.post('common/upload', params,
+        { 'Content-Type': 'multipart/form-data' }).then((res) => {
+        success && success(res.data)
+      }).catch((err) => {
+        error && error(err)
+      })
+    },
+  },
   account: {
     login (params) {
       return new Promise((resolve, reject) => {
@@ -295,6 +305,66 @@ export default {
     update (params) {
       return new Promise((resolve, reject) => {
         $axios.put(`params/update/${params._id}`, params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+  },
+  email: {
+    list (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('email/list', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    detail (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('email/detail', {
+          params: params,
+        }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    add (params) {
+      return new Promise((resolve, reject) => {
+        $axios.post('email/add', params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    del (params) {
+      return new Promise((resolve, reject) => {
+        $axios.delete('email/delete', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    update (params) {
+      return new Promise((resolve, reject) => {
+        $axios.put(`email/update/${params._id}`, params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    send (params) {
+      return new Promise((resolve, reject) => {
+        $axios.post('email/send', params).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))

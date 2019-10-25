@@ -9,9 +9,10 @@
       <el-menu-item index="productAdmin">产品管理</el-menu-item>
       <el-menu-item index="newsAdmin">新闻管理</el-menu-item>
       <el-menu-item index="faqsAdmin">FAQ管理</el-menu-item>
+      <el-menu-item index="emailAdmin">联系查看</el-menu-item>
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-location"></i>
+<!--          <i class="el-icon-setting"></i>-->
           <span>配置管理</span>
         </template>
         <el-menu-item index="bannerAdmin">banner管理</el-menu-item>

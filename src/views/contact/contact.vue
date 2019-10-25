@@ -5,23 +5,28 @@
         <!--      <div style="max-width: 300px;width: 100%;height:200px;border: 1px solid red;box-sizing: border-box;display: inline-block;">{{i+1}}</div>-->
         <!--    </el-col>-->
         <div class="banner-box">
-            <el-carousel :interval="5000" height="500px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <el-image style="height: 100%" fit="cover"
-                              src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"></el-image>
+            <el-carousel :interval="5000" height="500px" @change="carouselChange" :initial-index="initialIndex">
+                <el-carousel-item v-for="(item, index) in bannerList" :key="index">
+                    <a v-if="item.link" :href="item.link" target="_blank">
+                        <el-image style="height: 100%" fit="cover"
+                                  :src="item.imgUrl"></el-image>
+                    </a>
+                    <el-image v-else style="height: 100%" fit="cover"
+                              :src="item.imgUrl"></el-image>
                 </el-carousel-item>
             </el-carousel>
             <div class="fix-img-box">
                 <el-image
+                        v-if="bannerList[initialIndex] && bannerList[initialIndex].subImg"
                         class="fix-img"
-                        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                        fit="fit"></el-image>
+                        :src="bannerList[initialIndex].subImg"
+                        fit="contain"></el-image>
             </div>
         </div>
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
-                    <div class="nav-pos">HOME > PRODUCTS > Iron Man Costumes</div>
+                    <div class="nav-pos">HOME > CONTACT US</div>
                     <div class="box">
                         <div class="l">
                             <div class="b">
@@ -62,9 +67,9 @@
                                     <el-form-item label="Subject：" prop="subject">
                                         <el-input v-model="ruleForm.subject"></el-input>
                                     </el-form-item>
-                                    <el-form-item label="Your Message：" prop="message">
+                                    <el-form-item label="Your Message：" prop="content">
                                         <el-input :autosize="{ minRows: 4}" type="textarea"
-                                                  v-model="ruleForm.message"></el-input>
+                                                  v-model="ruleForm.content"></el-input>
                                     </el-form-item>
                                     <el-form-item>
                                         <img
@@ -88,11 +93,22 @@
 
 <script>
   // @ is an alias to /src
-  // import API from '../../utils/api'
+  import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
 
   export default {
+    metaInfo: {
+      title: 'CONTACT US', // set a title
+      meta: [{ // set meta
+        name: 'keyWords',
+        content: 'My Example App'
+      }],
+      link: [{ // set link
+        rel: 'asstes',
+        href: 'https://assets-cdn.github.com/'
+      }]
+    },
     components: {
       headerBar,
       pageFooter,
@@ -100,19 +116,22 @@
     name: 'contact',
     data () {
       return {
+        bannerList: [],
+        initialIndex: 0,
         ruleForm: {
           name: '',
           company: '',
           email: '',
           phone: '',
           subject: '',
-          message: '',
+          content: '',
         },
         rules: {
           email: [
             { required: true, message: 'Please enter your email', trigger: 'blur' },
+            { type: 'email', message: 'Please enter your email', trigger: ['blur', 'change'] }
           ],
-          message: [
+          content: [
             { required: true, message: 'Please enter your message', trigger: 'blur' },
           ]
         }
@@ -120,10 +139,35 @@
     },
     computed: {},
     methods: {
+      getBanner () {
+        API.banner.list({
+          page: 1,
+          size: 100,
+          flag: 6, // banner位置，1.首页 2.产品页 3.新闻 4.faqs 5. about 6. 联系页面
+        }).then(da => {
+          this.bannerList = da.data.data
+        })
+      },
+      carouselChange (index) {
+        console.info(index)
+        this.initialIndex = index
+      },
       submitForm (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!')
+            API.email.send(this.ruleForm).then(da => {
+              if (da.status) {
+                this.$message.success('消息发送成功！我们会尽快与你联系')
+                this.ruleForm = {
+                  name: '',
+                  company: '',
+                  email: '',
+                  phone: '',
+                  subject: '',
+                  content: '',
+                }
+              }
+            })
           } else {
             console.log('error submit!!')
             return false
@@ -138,6 +182,7 @@
 
     },
     created () {
+      this.getBanner()
     },
   }
 </script>

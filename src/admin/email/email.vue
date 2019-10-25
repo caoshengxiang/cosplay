@@ -3,7 +3,7 @@
         <div class="com-page-pos">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>FAQ管理</el-breadcrumb-item>
+                <el-breadcrumb-item>联系查看</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="com-page-box">
@@ -18,10 +18,10 @@
 <!--                            </el-button>-->
 <!--                        </div>-->
                     </div>
-                    <div class="com-page-opt">
-                        <el-button @click="addData" style="width: 120px;margin-left: 20px" type="primary">添加
-                        </el-button>
-                    </div>
+<!--                    <div class="com-page-opt">-->
+<!--                        <el-button @click="addData" style="width: 120px;margin-left: 20px" type="primary">添加-->
+<!--                        </el-button>-->
+<!--                    </div>-->
                 </div>
             </div>
             <div class="com-page-con">
@@ -30,40 +30,37 @@
                         border
                         style="width: 100%">
                     <el-table-column
-                            prop="q"
-                            label="问题"
+                            prop="name"
+                            label="名字"
                     >
                     </el-table-column>
                     <el-table-column
-                            prop="a"
-                            label="回答"
+                            prop="email"
+                            label="邮箱"
                     >
                     </el-table-column>
                     <el-table-column
-                            prop="status"
-                            label="状态">
-                        <template slot-scope="scope">
-                            <span v-if="scope.row.status === 1">上线</span>
-                            <span v-if="scope.row.status === 2">下线</span>
-                        </template>
+                            prop="phone"
+                            label="电话">
                     </el-table-column>
                     <el-table-column
-                            prop="weight"
-                            label="权重">
+                            prop="company"
+                            label="公司">
                     </el-table-column>
                     <el-table-column
-                            prop="created"
-                            label="创建时间">
-                        <template slot-scope="scope">
-                            {{$moment(scope.row.created)}}
-                        </template>
+                            prop="subject"
+                            label="标题">
+                    </el-table-column>
+                    <el-table-column
+                            prop="content"
+                            label="内容">
                     </el-table-column>
                     <el-table-column
                             fixed="right"
                             label="操作"
                             width="100">
                         <template slot-scope="scope">
-                            <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+<!--                            <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>-->
                             <el-button @click="handleDelClick(scope.row)" type="text" size="small">删除</el-button>
                         </template>
                     </el-table-column>
@@ -88,7 +85,7 @@
 <script>
   import API from '../../utils/api'
   export default {
-    name: 'faqs',
+    name: 'email',
     data () {
       return {
         loading: false,
@@ -114,7 +111,7 @@
         this.getData()
       },
       handleClick (row) {
-        this.$router.push({ name: 'faqsDetailAdmin', query: { _id: row._id } })
+        // this.$router.push({ name: 'faqsDetailAdmin', query: { _id: row._id } })
       },
       handleDelClick (row) {
         console.log(row)
@@ -123,7 +120,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          API.faqs.del({_id: row._id}).then((da) => {
+          API.email.del({_id: row._id}).then((da) => {
             if (da.status) {
               this.$message({
                 type: 'success',
@@ -140,11 +137,11 @@
         })
       },
       addData () {
-        this.$router.push({ name: 'faqsDetailAdmin' })
+        // this.$router.push({ name: 'faqsDetailAdmin' })
       },
       getData (callback) {
         this.loading = true
-        API.faqs.list(Object.assign({}, this.searchForm, {
+        API.email.list(Object.assign({}, this.searchForm, {
           page: this.currentPage,
           size: this.pageSize
         })).then(da => {

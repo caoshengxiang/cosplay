@@ -11,7 +11,7 @@
             <div class="com-page-bar">
                 <div class="com-page-search">
                     <div class="search-item">
-                        <el-select v-model="searchForm.flag" placeholder="请选择参数名称">
+                        <el-select v-model="searchForm.flag" placeholder="请选择参数名称" clearable>
                             <el-option label="产品分类" :value="1"></el-option>
                         </el-select>
                     </div>
@@ -104,7 +104,7 @@
       return {
         loading: false,
         currentPage: 1,
-        pageSizes: [10, 20],
+        pageSizes: [5, 10, 20],
         pageSize: 10,
         searchForm: {
           flag: 1,
@@ -184,7 +184,7 @@
       },
       handleClick (row) {
         this.dialogFormVisible = true
-        this.ruleForm = row
+        this.ruleForm = JSON.parse(JSON.stringify(row))
       },
       submitForm (formName) {
         this.$refs[formName].validate((valid) => {

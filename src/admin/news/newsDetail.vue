@@ -15,10 +15,25 @@
                         <el-input v-model="ruleForm.title"></el-input>
                     </el-form-item>
                     <el-form-item label="简介" prop="sub">
-                        <el-input v-model="ruleForm.sub"></el-input>
+                        <!--                        <el-input v-model="ruleForm.sub"></el-input>-->
+                        <el-input type="textarea" v-model="ruleForm.sub"></el-input>
                     </el-form-item>
                     <el-form-item label="详细介绍" prop="content">
-                        <el-input type="textarea" v-model="ruleForm.content"></el-input>
+                        <!--                        <el-input type="textarea" v-model="ruleForm.content"></el-input>-->
+                        <quill-editor
+                                v-model="ruleForm.content"
+                                ref="myQuillEditor"
+                        >
+                        </quill-editor>
+                    </el-form-item>
+                    <el-form-item label="列表图" prop="listImg">
+                        <el-upload class="avatar-uploader" action="" :show-file-list="false"
+                                   :before-upload="beforeAvatarUpload">
+                            <img v-if="ruleForm.listImg" :src="ruleForm.listImg" class="avatar"
+                                 style="width: 160px;height: 160px;">
+                            <i v-else class="el-icon-plus"
+                               style="width: 160px;height: 160px;line-height:160px;text-align: center;border: 1px dashed #c0ccda;    border-radius: 6px;background-color: #fbfdff;"></i>
+                        </el-upload>
                     </el-form-item>
                     <el-form-item label="权重" prop="weight">
                         <el-input type="number" v-model.number="ruleForm.weight"></el-input>
@@ -41,6 +56,8 @@
 
 <script>
   import API from '../../utils/api'
+  import { serverFileUrl } from '../../utils/const'
+
   export default {
     name: 'newsDetail',
     data () {
@@ -51,7 +68,8 @@
           sub: '',
           content: '',
           weight: 0,
-          status: 1
+          status: 1,
+          listImg: ''
         },
         rules: {
           title: [
@@ -67,9 +85,6 @@
             { required: true, message: '请选择', trigger: 'change' }
           ],
           listImg: [
-            { required: true, message: '请选择', trigger: 'change' }
-          ],
-          detailImgs: [
             { required: true, message: '请选择', trigger: 'change' }
           ],
           // weight: [
@@ -90,14 +105,14 @@
               API.news.update(this.ruleForm).then(da => {
                 if (da.status) {
                   this.$message.success('编辑成功')
-                  this.$router.push({name: 'newsAdmin'})
+                  this.$router.push({ name: 'newsAdmin' })
                 }
               })
             } else {
               API.news.add(this.ruleForm).then(da => {
                 if (da.status) {
                   this.$message.success('添加成功')
-                  this.$router.push({name: 'newsAdmin'})
+                  this.$router.push({ name: 'newsAdmin' })
                 }
                 setTimeout(() => {
                   this.loading = false
@@ -125,6 +140,33 @@
             callback && callback()
           }, 200)
         })
+      },
+      beforeAvatarUpload (file) {
+        const isImage = (file.type === 'image/jpeg' ||
+          file.type === 'image/gif' ||
+          file.type === 'image/png' ||
+          file.type === 'image/bmp')
+        const isLt2M = file.size / 1024 / 1024 < 10
+
+        if (!isImage) {
+          this.$message.error('上传图片只能是 JPG、JPEG、GIF、PNG、BMP 格式!')
+        }
+        if (!isLt2M) {
+          this.$message.error('上传图片大小不能超过 10MB!')
+        }
+
+        if (isImage && isLt2M) {
+          let param = new FormData()
+          param.append('file', file, file.name)
+
+          API.common.upload(param, (res) => {
+            if (res.status) {
+              this.ruleForm.listImg = serverFileUrl + res.data.url
+            }
+          })
+        }
+
+        return false
       },
     },
     created () {

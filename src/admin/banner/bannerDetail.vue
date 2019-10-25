@@ -16,10 +16,22 @@
                         <el-input v-model="ruleForm.title" autocomplete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="banner图" prop="imgUrl">
-                        <el-input v-model="ruleForm.imgUrl"></el-input>
+                        <el-upload class="avatar-uploader" action="" :show-file-list="false"
+                                   :before-upload="beforeAvatarUpload">
+                            <img v-if="ruleForm.imgUrl" :src="ruleForm.imgUrl" class="avatar"
+                                 style="width: 650px;height: 250px;">
+                            <i v-else class="el-icon-plus"
+                               style="width: 650px;height: 250px;line-height:250px;text-align: center;border: 1px dashed #c0ccda;    border-radius: 6px;background-color: #fbfdff;"></i>
+                        </el-upload>
                     </el-form-item>
                     <el-form-item label="机器人图" prop="subImg">
-                        <el-input v-model="ruleForm.subImg"></el-input>
+                        <el-upload class="avatar-uploader" action="" :show-file-list="false"
+                                   :before-upload="beforeAvatarUpload2">
+                            <img v-if="ruleForm.subImg" :src="ruleForm.subImg" class="avatar"
+                                 style="width: 552px;height: 680px;">
+                            <i v-else class="el-icon-plus"
+                               style="width: 552px;height: 680px;line-height:680px;text-align: center;border: 1px dashed #c0ccda;    border-radius: 6px;background-color: #fbfdff;"></i>
+                        </el-upload>
                     </el-form-item>
                     <el-form-item label="链接" prop="link">
                         <el-input v-model="ruleForm.link"></el-input>
@@ -46,6 +58,7 @@
 
 <script>
   import API from '../../utils/api'
+  import { serverFileUrl } from '../../utils/const'
 
   export default {
     name: 'bannerDetail',
@@ -54,8 +67,8 @@
         loading: false,
         ruleForm: {
           title: '',
-          imgUrl: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', // 图片地址
-          subImg: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', // 机器人图
+          imgUrl: '', // 图片地址
+          subImg: '', // 机器人图
           link: '',
           flag: 1 // banner位置，1.首页 2.产品页 3.新闻 4.faqs 5. about 6. 联系页面
         },
@@ -125,6 +138,60 @@
             callback && callback()
           }, 200)
         })
+      },
+      beforeAvatarUpload (file) {
+        const isImage = (file.type === 'image/jpeg' ||
+          file.type === 'image/gif' ||
+          file.type === 'image/png' ||
+          file.type === 'image/bmp')
+        const isLt2M = file.size / 1024 / 1024 < 10
+
+        if (!isImage) {
+          this.$message.error('上传图片只能是 JPG、JPEG、GIF、PNG、BMP 格式!')
+        }
+        if (!isLt2M) {
+          this.$message.error('上传图片大小不能超过 10MB!')
+        }
+
+        if (isImage && isLt2M) {
+          let param = new FormData()
+          param.append('file', file, file.name)
+
+          API.common.upload(param, (res) => {
+            if (res.status) {
+              this.ruleForm.imgUrl = serverFileUrl + res.data.url
+            }
+          })
+        }
+
+        return false
+      },
+      beforeAvatarUpload2 (file) {
+        const isImage = (file.type === 'image/jpeg' ||
+          file.type === 'image/gif' ||
+          file.type === 'image/png' ||
+          file.type === 'image/bmp')
+        const isLt2M = file.size / 1024 / 1024 < 10
+
+        if (!isImage) {
+          this.$message.error('上传图片只能是 JPG、JPEG、GIF、PNG、BMP 格式!')
+        }
+        if (!isLt2M) {
+          this.$message.error('上传图片大小不能超过 10MB!')
+        }
+
+        if (isImage && isLt2M) {
+          let param = new FormData()
+          param.append('file', file, file.name)
+
+          API.common.upload(param, (res) => {
+            if (res.status) {
+              this.ruleForm.subImg = serverFileUrl + res.data.url
+            }
+          })
+        }
+
+        return false
       },
     },
     created () {

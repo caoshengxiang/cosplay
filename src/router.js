@@ -85,6 +85,14 @@ const router = new Router({
           },
         },
         {
+          path: 'email',
+          name: 'emailAdmin',
+          component: () => import('./admin/email/email'),
+          meta: {
+            authKey: true
+          },
+        },
+        {
           path: 'banner',
           name: 'bannerAdmin',
           component: () => import('./admin/banner/banner'),
@@ -125,6 +133,12 @@ const router = new Router({
           path: 'product',
           name: 'product',
           component: () => import('./views/product/product'),
+          meta: {},
+        },
+        {
+          path: 'product/detail',
+          name: 'productDetail',
+          component: () => import('./views/product/detail'),
           meta: {},
         },
         {
@@ -181,7 +195,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       next({
-        path: '/login',
+        path: '/admin/login',
         query: {
           backUrl: to.fullPath,
         }, // 将跳转的路由path作为参数，登录成功后跳转到该路由

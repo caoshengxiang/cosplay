@@ -57,6 +57,10 @@
                         </template>
                     </el-table-column>
                     <el-table-column
+                            prop="weight"
+                            label="权重">
+                    </el-table-column>
+                    <el-table-column
                             fixed="right"
                             label="操作"
                             width="100">
@@ -92,7 +96,7 @@
       return {
         loading: false,
         currentPage: 1,
-        pageSizes: [10, 20],
+        pageSizes: [5, 10, 20],
         pageSize: 10,
         searchForm: {
           title: '',
