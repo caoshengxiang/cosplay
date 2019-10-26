@@ -51,22 +51,24 @@
                             <div class="p-list">
                                 <el-row>
                                     <el-col v-for="(item, index) in tableData" :key="index" :span="24">
-                                        <div class="p-item">
-                                            <div class="f-i">
-                                                <el-image
-                                                        class="pro-img"
-                                                        :src="item.listImg"
-                                                        fit="fit"></el-image>
-                                            </div>
-                                            <div class="detail">
-                                                <div class="name com-a-line">{{item.title}}</div>
-                                                <div class="text">
-                                                    {{item.sub}}
+                                        <router-link :to="{name: 'newsDetail', query: {_id: item._id}}">
+                                            <div class="p-item">
+                                                <div class="f-i">
+                                                    <el-image
+                                                            class="pro-img"
+                                                            :src="item.listImg"
+                                                            fit="fit"></el-image>
                                                 </div>
-                                                <div class="time">{{$moment(item.created, 'YYYY-MM-DD')}}</div>
-                                            </div>
+                                                <div class="detail">
+                                                    <div class="name com-a-line">{{item.title}}</div>
+                                                    <div class="text">
+                                                        {{item.sub}}
+                                                    </div>
+                                                    <div class="time">{{$moment(item.created, 'YYYY-MM-DD')}}</div>
+                                                </div>
 
-                                        </div>
+                                            </div>
+                                        </router-link>
                                     </el-col>
                                 </el-row>
                                 <el-pagination
@@ -101,7 +103,7 @@
       title: 'NEWS', // set a title
       meta: [{ // set meta
         name: 'keyWords',
-        content: 'My Example App'
+        content: 'GAUSS POWER'
       }],
       link: [{ // set link
         rel: 'asstes',
@@ -177,6 +179,7 @@
     .home-page {
         .banner-box {
             position: relative;
+
             .fix-img-box {
                 position: absolute;
                 top: 0;
@@ -196,21 +199,25 @@
             background-repeat: no-repeat;
             background-position: center bottom;
         }
+
         .logo-bg {
             background-image: url("../../../public/img/bg01.png");
             background-repeat: no-repeat;
             background-position: 0 calc(100% - 50px);
             background-size: 255px;
         }
+
         .contain {
             margin-left: 140px;
+
             .nav-pos {
                 padding: 80px 0;
-                font-size:33px;
-                font-family:BebasNeueRegular;
-                font-weight:400;
-                color:rgba(85,85,85,1);
+                font-size: 33px;
+                font-family: BebasNeueRegular;
+                font-weight: 400;
+                color: rgba(85, 85, 85, 1);
             }
+
             .box {
                 min-height: 900px;
                 display: flex;
@@ -235,11 +242,12 @@
 
                         .item-box {
                             padding: 30px 0;
+
                             div {
-                                font-size:19px;
-                                font-family:PingFang SC;
-                                font-weight:bold;
-                                color:rgba(23,23,23,1);
+                                font-size: 19px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
                                 margin-bottom: 30px;
                                 line-height: 1.6;
                             }
@@ -250,41 +258,47 @@
                 .r {
                     flex: 1;
                     padding-left: 16px;
+
                     .p-list {
                         .p-item {
                             margin-bottom: 41px;
                             display: flex;
+
                             .pro-img {
                                 width: 163px;
                                 height: 163px;
                             }
+
                             .detail {
                                 margin-left: 33px;
+
                                 .name {
-                                    font-size:19px;
-                                    font-family:PingFang SC;
-                                    font-weight:bold;
-                                    color:rgba(23,23,23,1);
+                                    font-size: 19px;
+                                    font-family: PingFang SC;
+                                    font-weight: bold;
+                                    color: rgba(23, 23, 23, 1);
                                     margin-bottom: 23px;
                                 }
+
                                 .text {
-                                    font-size:16px;
-                                    font-family:PingFang SC;
-                                    font-weight:bold;
-                                    color:rgba(85,85,85,1);
-                                    line-height:22px;
+                                    font-size: 16px;
+                                    font-family: PingFang SC;
+                                    font-weight: bold;
+                                    color: rgba(85, 85, 85, 1);
+                                    line-height: 22px;
                                     display: -webkit-box;
                                     -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 3;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
                                 }
+
                                 .time {
-                                    font-size:16px;
-                                    font-family:PingFang SC;
-                                    font-weight:bold;
-                                    color:rgba(85,85,85,1);
-                                    line-height:22px;
+                                    font-size: 16px;
+                                    font-family: PingFang SC;
+                                    font-weight: bold;
+                                    color: rgba(85, 85, 85, 1);
+                                    line-height: 22px;
                                     margin-top: 23px;
                                 }
                             }

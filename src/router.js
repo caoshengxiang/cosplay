@@ -148,6 +148,12 @@ const router = new Router({
           meta: {},
         },
         {
+          path: 'news/detail',
+          name: 'newsDetail',
+          component: () => import('./views/news/newsDetail'),
+          meta: {},
+        },
+        {
           path: 'faqs',
           name: 'faqs',
           component: () => import('./views/faqs/faqs'),

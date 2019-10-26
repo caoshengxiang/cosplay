@@ -157,7 +157,7 @@
       title: 'HOME', // set a title
       meta: [{ // set meta
         name: 'keyWords',
-        content: 'My Example App'
+        content: 'GAUSS POWER'
       }],
       link: [{ // set link
         rel: 'asstes',

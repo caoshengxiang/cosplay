@@ -61,20 +61,47 @@
                         </div>
                         <div class="r">
                             <div class="p-list">
+                                <div class="detail-show">
+                                    <div class="imgs">
+                                        <goods-imgs :imgUrls="imgUrls" :init-index="0"></goods-imgs>
+                                    </div>
+
+                                    <div class="det">
+                                        <div class="title">{{detail.title}}</div>
+                                        <div class="sub">{{detail.sub}}</div>
+                                        <div class="mes">
+                                            <router-link :to="{name: 'contact'}"><img
+                                                    style="width:245px;height: 56px;"
+                                                    src="../../../public/img/send-message.png"></router-link>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <el-row>
                                     <el-col :span="24">
                                         <div class="p-item p-item-1">
                                             <div class="title">PRODUCT DETAILS</div>
                                             <div class="ql-editor intro">
-                                                 <div v-html="detail.content"></div>
+                                                <div v-html="detail.content"></div>
                                             </div>
                                         </div>
                                     </el-col>
                                     <el-col :span="24">
                                         <div class="p-item p-item-1">
                                             <div class="title">RELATED PRODUCTS</div>
-                                            <div class="ql-editor intro">
-                                                <div v-html="detail.content"></div>
+                                            <div class="related-pro">
+                                                <el-row>
+                                                    <el-col v-for="(item, index) in tableData" :key="index" :span="6">
+                                                        <div :title="item.title" class="re-p-item"
+                                                             @click="toDetail(item)">
+                                                            <el-image
+                                                                    class="pro-img"
+                                                                    :src="item.listImg"
+                                                                    fit="fit"></el-image>
+                                                            <div class="name">{{item.title}}</div>
+                                                        </div>
+                                                    </el-col>
+                                                </el-row>
                                             </div>
                                         </div>
                                     </el-col>
@@ -82,7 +109,36 @@
                                         <div class="p-item p-item-1">
                                             <div class="title">SEND INQUIRY</div>
                                             <div class="ql-editor intro">
-                                                <div v-html="detail.content"></div>
+                                                <el-form size="medium" :model="ruleForm" :rules="rules" ref="ruleForm"
+                                                         label-width="140px"
+                                                         class="demo-ruleForm">
+                                                    <el-form-item label="Your Name：" prop="name">
+                                                        <el-input v-model="ruleForm.name"></el-input>
+                                                    </el-form-item>
+                                                    <el-form-item label="Company：" prop="company">
+                                                        <el-input v-model="ruleForm.company"></el-input>
+                                                    </el-form-item>
+                                                    <el-form-item label="Email：" prop="email">
+                                                        <el-input v-model="ruleForm.email"></el-input>
+                                                    </el-form-item>
+                                                    <el-form-item label="Phone：" prop="phone">
+                                                        <el-input v-model="ruleForm.phone"></el-input>
+                                                    </el-form-item>
+                                                    <el-form-item label="Subject：" prop="subject">
+                                                        <el-input v-model="ruleForm.subject"></el-input>
+                                                    </el-form-item>
+                                                    <el-form-item label="Your Message：" prop="content">
+                                                        <el-input :autosize="{ minRows: 4}" type="textarea"
+                                                                  v-model="ruleForm.content"></el-input>
+                                                    </el-form-item>
+                                                    <el-form-item>
+                                                        <img
+                                                                @click="submitForm('ruleForm')"
+                                                                style="width:245px;height: 56px;margin-left: 54px;"
+                                                                src="../../../public/img/send-message.png"
+                                                        >
+                                                    </el-form-item>
+                                                </el-form>
                                             </div>
                                         </div>
                                     </el-col>
@@ -104,13 +160,14 @@
   import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
+  import goodsImgs from './goodsImgs'
 
   export default {
     metaInfo: {
       title: 'PRODUCT DETAILS', // set a title
       meta: [{ // set meta
-        name: 'keyWords',
-        content: 'My Example App'
+        name: 'keywords',
+        content: 'GAUSS POWER'
       }],
       link: [{ // set link
         rel: 'asstes',
@@ -120,6 +177,7 @@
     components: {
       headerBar,
       pageFooter,
+      goodsImgs,
     },
     name: 'detail',
     data () {
@@ -130,7 +188,25 @@
         productCateName: '',
         loading: false,
         detail: {},
-        fileList: []
+        tableData: [],
+        ruleForm: {
+          name: '',
+          company: '',
+          email: '',
+          phone: '',
+          subject: '',
+          content: '',
+        },
+        rules: {
+          email: [
+            { required: true, message: 'Please enter your email', trigger: 'blur' },
+            { type: 'email', message: 'Please enter your email', trigger: ['blur', 'change'] }
+          ],
+          content: [
+            { required: true, message: 'Please enter your message', trigger: 'blur' },
+          ]
+        },
+        imgUrls: []
       }
     },
     computed: {},
@@ -170,16 +246,50 @@
         API.product.detail({ _id: this.$route.query._id }).then(da => {
           this.detail = da.data
           this.productCateName = da.data.productCateName
-          this.fileList = da.data.detailImgs.split(',').map(item => {
-            return {
-              url: item
-            }
-          })
+          this.imgUrls = da.data.detailImgs.split(',')
           setTimeout(() => {
             this.loading = false
             callback && callback()
           }, 200)
         })
+      },
+      getData () {
+        API.product.list(Object.assign({}, {
+          page: 1,
+          size: 8,
+          status: 1,
+        })).then(da => {
+          this.tableData = da.data.data
+        })
+      },
+      submitForm (formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            API.email.send(this.ruleForm).then(da => {
+              if (da.status) {
+                this.$message.success('消息发送成功！我们会尽快与你联系')
+                this.ruleForm = {
+                  name: '',
+                  company: '',
+                  email: '',
+                  phone: '',
+                  subject: '',
+                  content: '',
+                }
+              }
+            })
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
+      },
+      resetForm (formName) {
+        this.$refs[formName].resetFields()
+      },
+      toDetail (item) {
+        this.$router.push({ name: 'productDetail', query: { _id: item._id } })
+        this.getDetail()
       },
     },
     beforeCreate () {
@@ -189,6 +299,7 @@
       this.getProductCateList()
       this.getBanner()
       this.getDetail()
+      this.getData()
     },
   }
 </script>
@@ -343,6 +454,67 @@
                         .fix-img {
                             width: 100%;
                             margin-bottom: 30px;
+                        }
+
+                        .related-pro {
+                            .re-p-item {
+                                width: 178px;
+                                margin-bottom: 41px;
+                                cursor: pointer;
+
+                                .pro-img {
+                                    width: 178px;
+                                    height: 229px;
+                                }
+
+                                .name {
+                                    font-size: 16px;
+                                    font-family: PingFang SC;
+                                    font-weight: bold;
+                                    color: rgba(23, 23, 23, 1);
+                                    text-align: center;
+                                    height: 42px;
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    -webkit-line-clamp: 2;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                }
+                            }
+                        }
+                    }
+
+                    .detail-show {
+                        display: flex;
+                        margin-bottom: 20px;
+
+                        .imgs {
+                            width: 310px;
+                        }
+
+                        .det {
+                            flex: 1;
+                            margin-left: 20px;
+
+                            .title {
+                                font-size: 20px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
+                            }
+
+                            .sub {
+                                font-size: 16px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(85, 85, 85, 1);
+                                line-height: 22px;
+                                margin-top: 24px;
+                                margin-bottom: 26px;
+                            }
+
+                            .msg {
+                            }
                         }
                     }
                 }

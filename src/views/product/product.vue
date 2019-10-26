@@ -63,7 +63,7 @@
                             <div class="p-list">
                                 <el-row>
                                     <el-col v-for="(item, index) in tableData" :key="index" :span="6">
-                                        <div class="p-item" @click="toDetail(item)">
+                                        <div :title="item.title" class="p-item" @click="toDetail(item)">
                                             <el-image
                                                     class="pro-img"
                                                     :src="item.listImg"
@@ -104,7 +104,7 @@
       title: 'PRODUCT', // set a title
       meta: [{ // set meta
         name: 'keyWords',
-        content: 'My Example App'
+        content: 'GAUSS POWER'
       }],
       link: [{ // set link
         rel: 'asstes',
@@ -312,6 +312,11 @@
                                 color: rgba(23, 23, 23, 1);
                                 text-align: center;
                                 height: 42px;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
                             }
                         }
                     }

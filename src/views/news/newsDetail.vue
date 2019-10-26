@@ -1,9 +1,6 @@
 <template>
     <div class="com-pages home-page">
-        <header-bar active="faqs"></header-bar>
-        <!--    <el-col :xs="12" :sm="8" :md="8" :lg="6" :xl="6" v-for="i in 10" :key="i" style="text-align: center">-->
-        <!--      <div style="max-width: 300px;width: 100%;height:200px;border: 1px solid red;box-sizing: border-box;display: inline-block;">{{i+1}}</div>-->
-        <!--    </el-col>-->
+        <header-bar active="product"></header-bar>
         <div class="banner-box">
             <el-carousel :interval="5000" height="500px" @change="carouselChange" :initial-index="initialIndex">
                 <el-carousel-item v-for="(item, index) in bannerList" :key="index">
@@ -26,7 +23,7 @@
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
-                    <div class="nav-pos">HOME > FAQS</div>
+                    <div class="nav-pos">HOME > NEWS > {{detail.title}}</div>
                     <div class="box">
                         <div class="l">
                             <div class="b">
@@ -49,29 +46,9 @@
                         </div>
                         <div class="r">
                             <div class="p-list">
-                                <el-row>
-                                    <el-col v-for="(item, index) in tableData" :key="index" :span="24">
-                                        <div class="p-item">
-                                            <div class="f-i">
-                                                <div class="index">{{index+1}}</div>
-                                            </div>
-                                            <div class="detail">
-                                                <div class="q">{{item.q}} </div>
-                                                <div class="a">{{item.a}}</div>
-                                            </div>
-
-                                        </div>
-                                    </el-col>
-                                </el-row>
-                                <el-pagination
-                                        :hide-on-single-page="true"
-                                        @current-change="handleCurrentChange"
-                                        :current-page="currentPage"
-                                        :page-size="pageSize"
-                                        background
-                                        layout="prev, pager, next"
-                                        :total="total">
-                                </el-pagination>
+                                <div class="ql-editor p-item">
+                                    <div v-html="detail.content"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,16 +62,14 @@
 </template>
 
 <script>
-  // @ is an alias to /src
   import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
-
   export default {
     metaInfo: {
-      title: 'FAQS', // set a title
+      title: 'NEWS DETAILS', // set a title
       meta: [{ // set meta
-        name: 'keyWords',
+        name: 'keywords',
         content: 'GAUSS POWER'
       }],
       link: [{ // set link
@@ -106,25 +81,21 @@
       headerBar,
       pageFooter,
     },
-    name: 'faqs',
+    name: 'newsDetail',
     data () {
       return {
         bannerList: [],
         initialIndex: 0,
-        tableData: [],
-        total: 0,
-        currentPage: 1,
-        pageSize: 12,
         loading: false,
+        detail: {},
       }
     },
-    computed: {},
     methods: {
       getBanner () {
         API.banner.list({
           page: 1,
           size: 100,
-          flag: 4, // banner位置，1.首页 2.产品页 3.新闻 4.faqs 5. about 6. 联系页面
+          flag: 3, // banner位置，1.首页 2.产品页 3.新闻 4.faqs 5. about 6. 联系页面
         }).then(da => {
           this.bannerList = da.data.data
         })
@@ -133,34 +104,25 @@
         console.info(index)
         this.initialIndex = index
       },
-      getData (callback) {
+      getDetail (callback) {
+        if (!this.$route.query._id) {
+          this.$router.go(-1)
+          return
+        }
         this.loading = true
-        API.faqs.list(Object.assign({}, {
-          page: this.currentPage,
-          size: this.pageSize,
-          status: 1
-        })).then(da => {
-          this.tableData = da.data.data
-          this.total = da.data.total
+        API.news.detail({ _id: this.$route.query._id }).then(da => {
+          this.detail = da.data
           setTimeout(() => {
             this.loading = false
             callback && callback()
           }, 200)
         })
       },
-      handleCurrentChange (val) {
-        this.currentPage = val
-        console.log(`当前页: ${val}`)
-        this.getData()
-      },
-    },
-    beforeCreate () {
-
     },
     created () {
       this.getBanner()
-      this.getData()
-    },
+      this.getDetail()
+    }
   }
 </script>
 
@@ -171,6 +133,7 @@
     .home-page {
         .banner-box {
             position: relative;
+
             .fix-img-box {
                 position: absolute;
                 top: 0;
@@ -190,21 +153,25 @@
             background-repeat: no-repeat;
             background-position: center bottom;
         }
+
         .logo-bg {
             background-image: url("../../../public/img/bg01.png");
             background-repeat: no-repeat;
             background-position: 0 calc(100% - 50px);
             background-size: 255px;
         }
+
         .contain {
             margin-left: 140px;
+
             .nav-pos {
                 padding: 80px 0;
-                font-size:33px;
-                font-family:BebasNeueRegular;
-                font-weight:400;
-                color:rgba(85,85,85,1);
+                font-size: 33px;
+                font-family: BebasNeueRegular;
+                font-weight: 400;
+                color: rgba(85, 85, 85, 1);
             }
+
             .box {
                 min-height: 900px;
                 display: flex;
@@ -229,13 +196,23 @@
 
                         .item-box {
                             padding: 30px 0;
+
                             div {
-                                font-size:19px;
-                                font-family:PingFang SC;
-                                font-weight:bold;
-                                color:rgba(23,23,23,1);
+                                font-size: 19px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
                                 margin-bottom: 30px;
                                 line-height: 1.6;
+                                cursor: pointer;
+
+                                &.cate:hover {
+                                    text-decoration: underline;
+                                }
+
+                                &.active {
+                                    color: rgba(251, 164, 35, 1);
+                                }
                             }
                         }
                     }
@@ -244,41 +221,23 @@
                 .r {
                     flex: 1;
                     padding-left: 16px;
+
                     .p-list {
                         .p-item {
-                            margin-bottom: 70px;
-                            display: flex;
-                            .f-i {
-                                .index {
-                                    width: 54px;
-                                    height: 54px;
-                                    line-height: 54px;
-                                    text-align: center;
-                                    background:rgba(23,23,23,1);
-                                    font-size:33px;
-                                    font-family:BebasNeueRegular;
-                                    font-weight:bold;
-                                    color:rgba(243,193,60,1);
-                                    margin-right: 16px;
-                                }
+                            width: 660px;
+                            margin-bottom: 41px;
+
+                            img {
+                                max-width: 100%;
                             }
-                            .detail {
-                                .q {
-                                    font-size:19px;
-                                    font-family:PingFang SC;
-                                    font-weight:bold;
-                                    color:rgba(23,23,23,1);
-                                    overflow: hidden;
-                                }
-                                .a {
-                                    font-size:16px;
-                                    font-family:PingFang SC;
-                                    font-weight:bold;
-                                    color:rgba(85,85,85,1);
-                                    line-height:22px;
-                                    margin-top: 6px;
-                                    overflow: hidden;
-                                }
+
+                            .name {
+                                font-size: 16px;
+                                font-family: PingFang SC;
+                                font-weight: bold;
+                                color: rgba(23, 23, 23, 1);
+                                text-align: center;
+                                height: 42px;
                             }
                         }
                     }
