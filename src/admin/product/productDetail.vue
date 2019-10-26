@@ -146,6 +146,9 @@
                   this.$message.success('编辑成功')
                   this.$router.push({ name: 'productAdmin' })
                 }
+                setTimeout(() => {
+                  this.loading = false
+                }, 200)
               })
             } else {
               API.product.add(this.ruleForm).then(da => {

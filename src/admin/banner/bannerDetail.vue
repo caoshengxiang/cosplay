@@ -105,6 +105,9 @@
                   this.$message.success('编辑成功')
                   this.$router.push({ name: 'bannerAdmin' })
                 }
+                setTimeout(() => {
+                  this.loading = false
+                }, 200)
               })
             } else {
               API.banner.add(this.ruleForm).then(da => {

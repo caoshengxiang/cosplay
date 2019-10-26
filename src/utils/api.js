@@ -46,15 +46,13 @@ export default {
       // })
     },
     updatePwd (params) {
-      // return new Promise((resolve, reject) => {
-      //   $axios.get('user/password/edit', {
-      //     params: params,
-      //   }).then((res) => {
-      //     resolve(res.data)
-      //   }).catch((err) => {
-      //     reject(new Error(err))
-      //   })
-      // })
+      return new Promise((resolve, reject) => {
+        $axios.post('users/update/pass', params).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
     },
   },
   product: {
@@ -91,7 +89,7 @@ export default {
     },
     del (params) {
       return new Promise((resolve, reject) => {
-        $axios.delete('product/delete', {params: params}).then((res) => {
+        $axios.delete('product/delete', { params: params }).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
@@ -142,7 +140,7 @@ export default {
     },
     del (params) {
       return new Promise((resolve, reject) => {
-        $axios.delete('news/delete', {params: params}).then((res) => {
+        $axios.delete('news/delete', { params: params }).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
@@ -193,7 +191,7 @@ export default {
     },
     del (params) {
       return new Promise((resolve, reject) => {
-        $axios.delete('faqs/delete', {params: params}).then((res) => {
+        $axios.delete('faqs/delete', { params: params }).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
@@ -244,7 +242,7 @@ export default {
     },
     del (params) {
       return new Promise((resolve, reject) => {
-        $axios.delete('banner/delete', {params: params}).then((res) => {
+        $axios.delete('banner/delete', { params: params }).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
@@ -295,7 +293,7 @@ export default {
     },
     del (params) {
       return new Promise((resolve, reject) => {
-        $axios.delete('params/delete', {params: params}).then((res) => {
+        $axios.delete('params/delete', { params: params }).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
@@ -346,7 +344,7 @@ export default {
     },
     del (params) {
       return new Promise((resolve, reject) => {
-        $axios.delete('email/delete', {params: params}).then((res) => {
+        $axios.delete('email/delete', { params: params }).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))

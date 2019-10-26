@@ -76,6 +76,9 @@
                   this.$message.success('编辑成功')
                   this.$router.push({name: 'faqsAdmin'})
                 }
+                setTimeout(() => {
+                  this.loading = false
+                }, 200)
               })
             } else {
               API.faqs.add(this.ruleForm).then(da => {

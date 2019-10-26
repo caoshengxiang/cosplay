@@ -198,6 +198,9 @@
                   this.dialogFormVisible = false
                 }
               })
+              setTimeout(() => {
+                this.loading = false
+              }, 200)
             } else {
               API.params.add(this.ruleForm).then(da => {
                 if (da.status) {

@@ -1,6 +1,6 @@
 <template>
     <div class="com-pages home-page">
-        <header-bar active="product"></header-bar>
+        <header-bar active="news"></header-bar>
         <div class="banner-box">
             <el-carousel :interval="5000" height="500px" @change="carouselChange" :initial-index="initialIndex">
                 <el-carousel-item v-for="(item, index) in bannerList" :key="index">
