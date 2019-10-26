@@ -95,10 +95,11 @@
             <div class="com-item-con faqs">
                 <div class="title">FAQS</div>
                 <div class="con">
-                    <el-image
-                            class="f-img"
-                            src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                            fit="fill"></el-image>
+                    <img   class="f-img" src="../../../public/img/home-1.png" alt="">
+<!--                    <el-image-->
+<!--                            class="f-img"-->
+<!--                            src="../../../public/img/home-1.png"-->
+<!--                            fit="fill"></el-image>-->
                     <div class="faqs-box">
                         <div class="line-1"></div>
                         <div class="line-2"></div>
