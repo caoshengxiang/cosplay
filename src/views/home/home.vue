@@ -158,7 +158,7 @@
       title: 'HOME', // set a title
       meta: [{ // set meta
         name: 'keyWords',
-        content: 'GAUSS POWER'
+        content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
       }],
       link: [{ // set link
         rel: 'asstes',

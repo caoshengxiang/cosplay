@@ -5,13 +5,12 @@
                 <el-row :gutter="42">
                     <el-col :span="6" class="col-1">
                         <div><img class="logo" src="../assets/logo.png" alt=""></div>
-                        <div>Chengdu chengdu Art Co.,Ltd</div>
-                        <div>Mob:+8613800138000</div>
-                        <div>E-mail:123456@qq.com</div>
+                        <div>Chengdu Gauss Power Technology Co., Ltd</div>
+                        <div>Phone: +8618628067519</div>
+                        <div>Emai: gausspowermanager@163.com</div>
                         <div>
-                            Add:Room 1415, Floor 14th,<br>
-                            Unit 1 Building 2 Wanda Square,<br>
-                            Qingyang district, Chengdu China
+                            Address: 5, 6, 7, 8 Floor, Area C and 6, 7 Floor, Area B, Building 1, No. 200, Tianfu 5th Street,High-tech Zone,Chengdu,
+                            China (Sichuan) Pilot Free Trade Zone
                         </div>
                     </el-col>
                     <el-col :span="6" class="col-2">
@@ -53,7 +52,7 @@
                 </el-row>
             </div>
         </div>
-        <div class="copyright">Copyright © Chengdu Super Queen Art Co.,Ltd All Rights Reserved.</div>
+        <div class="copyright">Copyright © Chengdu Super Queen Art Co.,Ltd All Rights Reserved. Sichuan ICP No. 19033486</div>
     </div>
 </template>
 

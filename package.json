@@ -7,8 +7,8 @@
     "dev": "vue-cli-service serve --mode development",
     "build:test": "vue-cli-service build --mode test",
     "build:prod": "vue-cli-service build --mode production",
-    "gz:test": "npm run build:test && bash ./bash/gz.sh",
-    "gz:prod": "npm run build:prod && bash ./bash/gz.sh",
+    "gz:test": "npm run build:test && tar zcvf dist.tar.gz dist",
+    "gz:prod": "npm run build:prod && tar zcvf dist.tar.gz dist",
     "release:test": "npm run gz:test && bash ./bash/test.sh",
     "release:prod": "npm run gz:prod && bash ./bash/prod.sh",
     "lint": "vue-cli-service lint"

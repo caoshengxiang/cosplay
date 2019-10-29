@@ -31,20 +31,7 @@
                         <div class="l">
                             <div class="b">
                                 <div class="title">CONTACT US</div>
-                                <div class="item-box">
-                                    <div>
-                                        Chengdu Gauss Power
-                                        Art Co.,Ltd
-                                    </div>
-                                    <div>Mob：+860283928272</div>
-                                    <div>Email：dkjfi@163.com</div>
-                                    <div>
-                                        Add：Room 1415, Floor
-                                        14th,Unit 1 Building 2
-                                        Wanda SquareQingyang
-                                        district, Chengdu China
-                                    </div>
-                                </div>
+                                <contactItemBox></contactItemBox>
                             </div>
                         </div>
                         <div class="r">
@@ -97,13 +84,14 @@
   import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
+  import contactItemBox from '../../components/contactItemBox'
 
   export default {
     metaInfo: {
       title: 'NEWS', // set a title
       meta: [{ // set meta
         name: 'keyWords',
-        content: 'GAUSS POWER'
+        content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
       }],
       link: [{ // set link
         rel: 'asstes',
@@ -113,6 +101,7 @@
     components: {
       headerBar,
       pageFooter,
+      contactItemBox,
     },
     name: 'news',
     data () {

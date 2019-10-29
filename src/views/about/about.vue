@@ -31,20 +31,7 @@
                         <div class="l">
                             <div class="b">
                                 <div class="title">CONTACT US</div>
-                                <div class="item-box">
-                                    <div>
-                                        Chengdu Gauss Power
-                                        Art Co.,Ltd
-                                    </div>
-                                    <div>Mob：+860283928272</div>
-                                    <div>Email：dkjfi@163.com</div>
-                                    <div>
-                                        Add：Room 1415, Floor
-                                        14th,Unit 1 Building 2
-                                        Wanda SquareQingyang
-                                        district, Chengdu China
-                                    </div>
-                                </div>
+                                <contactItemBox></contactItemBox>
                             </div>
                         </div>
                         <div class="r">
@@ -52,42 +39,37 @@
                                 <el-row>
                                     <el-col :span="24">
                                         <div class="p-item p-item-1">
-                                            <div class="title">OUR HISTORY</div>
-                                            <div class="intro">
-                                                Chengdu Gauss Power Technology Co., Ltd.is a professional
-                                                production-manufacturing enterprise specialized in cosplay costume
-                                                design and peoduction. Our company has been established since 2014 to
-                                                grow up to be a team of high-quality, united, hard-working and
-                                                truth-seeking characters. We own an independent studio, professional
-                                                team with ten years of experience in China;All the costumes are
-                                                handmade, without any mass production.
+                                            <div class="title">Our History</div>
+                                            <div class="intro"  style="text-align: justify">
+                                                Chengdu Gauss Power Technology Co., Ltd is a professional production-manufacturing enterprise specialized in cosplay costume design and production. Our company has been established since 2015 to grow up to be a team of high-quality, united, hard-working and truth-seeking characters. We own an independent studio, professional team with ten years of experience in China;All the costumes are handmade and we win a good reputation in Cosplay field.
                                             </div>
-                                            <el-image
-                                                    class="fix-img"
-                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                                                    fit="contain"></el-image>
+<!--                                            <el-image-->
+<!--                                                    class="fix-img"-->
+<!--                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"-->
+<!--                                                    fit="contain"></el-image>-->
+                                            <img class="fix-img" src="../../../public/img/images/about-1.jpg" fit="contain" alt="">
                                         </div>
                                         <div class="p-item p-item-2">
-                                            <div class="title">OUR TEAM</div>
-                                            <div class="intro">Our team has 10 years of experience in making props
-                                                costumes and own designers, drafters, tailors and packing staff.
+                                            <div class="title">Our studio</div>
+                                            <div class="intro">Our studio has 10 years of experience in making props costumes and we own many experienced designers, drafters, tailors and packing staff.
                                             </div>
-                                            <el-image
-                                                    class="fix-img"
-                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                                                    fit="contain"></el-image>
+<!--                                            <el-image-->
+<!--                                                    class="fix-img"-->
+<!--                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"-->
+<!--                                                    fit="contain"></el-image>-->
+                                            <img class="fix-img" src="../../../public/img/images/about-2.jpg" fit="contain" alt="">
                                         </div>
                                         <div class="p-item p-item-3">
-                                            <div class="title">OUR PRODUCTS</div>
+                                            <div class="title">our products</div>
                                             <div class="intro">
-                                                Including Transformers costumes,Iron man costumes,Thanos costumes,Star
-                                                wars costumes and other game roles.The all costumes can be customized as
-                                                customers’ demands.
+                                                1.Including Transformers costumes,Iron man costumes,Thanos costumes,Star wars costumes and other game roles.
+                                                The all costumes can be customized as customers’ demands.
                                             </div>
-                                            <el-image
-                                                    class="fix-img"
-                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                                                    fit="contain"></el-image>
+<!--                                            <el-image-->
+<!--                                                    class="fix-img"-->
+<!--                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"-->
+<!--                                                    fit="contain"></el-image>-->
+                                            <img class="fix-img" src="../../../public/img/images/about-3.jpg" fit="contain" alt="">
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -108,18 +90,20 @@
   import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
+  import contactItemBox from '../../components/contactItemBox'
 
   export default {
     components: {
       headerBar,
       pageFooter,
+      contactItemBox,
     },
     name: 'about',
     metaInfo: {
       title: 'ABOUT US', // set a title
       meta: [{ // set meta
         name: 'keyWords',
-        content: 'GAUSS POWER'
+        content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
       }],
       link: [{ // set link
         rel: 'asstes',
@@ -245,7 +229,7 @@
                     padding-left: 16px;
 
                     .p-list {
-                        width: 540px;
+                        width: 640px;
 
                         .p-item {
                             &.p-item-1, &.p-item-3 {

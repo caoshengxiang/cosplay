@@ -43,20 +43,7 @@
                             </div>
                             <div class="b">
                                 <div class="title">CONTACT US</div>
-                                <div class="item-box">
-                                    <div>
-                                        Chengdu Gauss Power
-                                        Art Co.,Ltd
-                                    </div>
-                                    <div>Mob：+860283928272</div>
-                                    <div>Email：dkjfi@163.com</div>
-                                    <div>
-                                        Add：Room 1415, Floor
-                                        14th,Unit 1 Building 2
-                                        Wanda SquareQingyang
-                                        district, Chengdu China
-                                    </div>
-                                </div>
+                                <contactItemBox></contactItemBox>
                             </div>
                         </div>
                         <div class="r">
@@ -161,13 +148,14 @@
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
   import goodsImgs from './goodsImgs'
+  import contactItemBox from '../../components/contactItemBox'
 
   export default {
     metaInfo: {
       title: 'PRODUCT DETAILS', // set a title
       meta: [{ // set meta
         name: 'keywords',
-        content: 'GAUSS POWER'
+        content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
       }],
       link: [{ // set link
         rel: 'asstes',
@@ -178,6 +166,7 @@
       headerBar,
       pageFooter,
       goodsImgs,
+      contactItemBox,
     },
     name: 'detail',
     data () {
@@ -421,26 +410,32 @@
                     }
 
                     .p-item {
-                        &.p-item-1, &.p-item-3 {
-                            .title {
-                                &:after {
-                                    content: '';
-                                    display: inline-block;
-                                    position: absolute;
-                                    left: 0;
-                                    bottom: -20px;
-                                    width: 160px;
-                                    height: 8px;
-                                    background-color: @main-color;
-                                }
-                            }
-                        }
 
-                        .title {
+                        /*.title {
                             font-weight: bold;
-                            font-size: 49px;
+                            font-size: 39px;
                             position: relative;
                             margin-bottom: 40px;
+                            &:after {
+                                content: '';
+                                display: inline-block;
+                                position: absolute;
+                                left: 0;
+                                bottom: -20px;
+                                width: 160px;
+                                height: 8px;
+                                background-color: @main-color;
+                            }
+                        }*/
+                        .title {
+                            height: 68px;
+                            line-height: 68px;
+                            text-align: center;
+                            background: rgba(251, 164, 35, 1);
+                            font-size: 33px;
+                            font-family: BebasNeueRegular;
+                            font-weight: bold;
+                            color: rgba(23, 23, 23, 1);
                         }
 
                         .intro {
