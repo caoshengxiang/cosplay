@@ -63,12 +63,14 @@ let Tool = [ // 可选参数  选择工具栏的需要哪些功能  默认是全
 let editorOption = quillRedefine({
   // 图片上传的设置
   uploadConfig: {
-    action: serverUrl + '/common/upload', // 必填参数 图片上传地址
+    // action: serverUrl + '/common/upload', // 必填参数 图片上传地址
+    action: 'http://119.27.160.97:7995/suining/file/upload', // 必填参数 图片上传地址
     // action: serverUrl + '/file/upload', // 必填参数 图片上传地址
     // 必选参数  res是一个函数，函数接收的response为上传成功时服务器返回的数据
     // 你必须把返回的数据中所包含的图片地址 return 回去
     res: (respnse) => {
-      return serverFileUrl + respnse.data.url
+      // return serverFileUrl + respnse.data.url
+      return respnse.data.url
     },
     methods: 'POST', // 可选参数 图片上传方式  默认为post
     // token: webStorage.getItem('userInfo').authKey, // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage

@@ -162,9 +162,14 @@
           let param = new FormData()
           param.append('file', file, file.name)
 
-          API.common.upload(param, (res) => {
+          // API.common.upload(param, (res) => {
+          //   if (res.status) {
+          //     this.ruleForm.listImg = serverFileUrl + res.data.url
+          //   }
+          // })
+          API.common.uploadExternalOs(param, (res) => {
             if (res.status) {
-              this.ruleForm.listImg = serverFileUrl + res.data.url
+              this.ruleForm.listImg = res.data.url
             }
           })
         }

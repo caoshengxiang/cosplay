@@ -22,6 +22,7 @@
                         :src="bannerList[initialIndex].subImg"
                         fit="contain"></el-image>
             </div>
+            <share-bar></share-bar>
         </div>
         <div class="com-item-fill pro-bg">
             <div class="com-item-con">
@@ -152,6 +153,7 @@
   import API from '../../utils/api'
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
+  import shareBar from '../../components/shareBar'
 
   export default {
     metaInfo: {
@@ -168,6 +170,7 @@
     components: {
       headerBar,
       pageFooter,
+      shareBar,
     },
     name: 'home',
     data () {

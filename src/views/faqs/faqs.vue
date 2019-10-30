@@ -22,6 +22,7 @@
                         :src="bannerList[initialIndex].subImg"
                         fit="contain"></el-image>
             </div>
+            <share-bar></share-bar>
         </div>
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
@@ -77,6 +78,7 @@
   import headerBar from '../../components/headerBar'
   import pageFooter from '../../components/pageFooter'
   import contactItemBox from '../../components/contactItemBox'
+  import shareBar from '../../components/shareBar'
 
   export default {
     metaInfo: {
@@ -94,6 +96,7 @@
       headerBar,
       pageFooter,
       contactItemBox,
+      shareBar,
     },
     name: 'faqs',
     data () {

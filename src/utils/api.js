@@ -15,6 +15,32 @@ import $axios from '../utils/axiosConfig' // axios配置文件
 
 export default {
   common: {
+    uploadExternalOs (params) {
+      return new Promise((resolve, reject) => {
+        $axios.post('file/upload', params,
+          {
+            baseURL: 'http://119.27.160.97:7995/suining',
+            'Content-Type': 'multipart/form-data'
+          }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+
+    uploadOs (params) {
+      return new Promise((resolve, reject) => {
+        $axios.post('common/upload/cos', params,
+          {
+            'Content-Type': 'multipart/form-data'
+          }).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
     upload (params, success, error) {
       $axios.post('common/upload', params,
         { 'Content-Type': 'multipart/form-data' }).then((res) => {

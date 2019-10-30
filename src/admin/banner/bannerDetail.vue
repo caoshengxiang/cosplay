@@ -160,9 +160,14 @@
           let param = new FormData()
           param.append('file', file, file.name)
 
-          API.common.upload(param, (res) => {
+          // API.common.upload(param, (res) => {
+          //   if (res.status) {
+          //     this.ruleForm.imgUrl = serverFileUrl + res.data.url
+          //   }
+          // })
+          API.common.uploadExternalOs(param, (res) => {
             if (res.status) {
-              this.ruleForm.imgUrl = serverFileUrl + res.data.url
+              this.ruleForm.imgUrl = res.data.url
             }
           })
         }
@@ -187,9 +192,14 @@
           let param = new FormData()
           param.append('file', file, file.name)
 
-          API.common.upload(param, (res) => {
+          // API.common.upload(param, (res) => {
+          //   if (res.status) {
+          //     this.ruleForm.subImg = serverFileUrl + res.data.url
+          //   }
+          // })
+          API.common.uploadExternalOs(param, (res) => {
             if (res.status) {
-              this.ruleForm.subImg = serverFileUrl + res.data.url
+              this.ruleForm.subImg = res.data.url
             }
           })
         }

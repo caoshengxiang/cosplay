@@ -22,6 +22,7 @@
                         :src="bannerList[initialIndex].subImg"
                         fit="contain"></el-image>
             </div>
+            <share-bar></share-bar>
         </div>
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
@@ -149,6 +150,7 @@
   import pageFooter from '../../components/pageFooter'
   import goodsImgs from './goodsImgs'
   import contactItemBox from '../../components/contactItemBox'
+  import shareBar from '../../components/shareBar'
 
   export default {
     metaInfo: {
@@ -167,6 +169,7 @@
       pageFooter,
       goodsImgs,
       contactItemBox,
+      shareBar,
     },
     name: 'detail',
     data () {
@@ -514,6 +517,13 @@
                     }
                 }
             }
+        }
+    }
+</style>
+<style lang="less">
+    .ql-editor {
+        img {
+            max-width: 100%;
         }
     }
 </style>

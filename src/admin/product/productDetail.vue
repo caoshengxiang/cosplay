@@ -43,7 +43,7 @@
                     <el-form-item label="详情图片" prop="detailImgs">
                         <el-upload
                                 :file-list="fileList"
-                                :action="serverUrl + '/common/upload'"
+                                :action="uploadExternalOsUrl"
                                 list-type="picture-card"
                                 :on-preview="handlePictureCardPreview"
                                 :on-remove="handleRemove"
@@ -77,7 +77,7 @@
 
 <script>
   import API from '../../utils/api'
-  import { serverFileUrl, serverUrl } from '../../utils/const'
+  import { serverFileUrl, serverUrl, uploadExternalOsUrl } from '../../utils/const'
 
   export default {
     name: 'productDetail',
@@ -132,6 +132,9 @@
       },
       serverUrl () {
         return serverUrl
+      },
+      uploadExternalOsUrl () {
+        return uploadExternalOsUrl
       }
     },
     methods: {
@@ -214,11 +217,19 @@
           let param = new FormData()
           param.append('file', file, file.name)
 
-          API.common.upload(param, (res) => {
-            if (res.status) {
-              this.ruleForm.listImg = serverFileUrl + res.data.url
-            }
+          // API.common.upload(param, (res) => { // 上传保存服务器
+          //   if (res.status) {
+          //     this.ruleForm.listImg = serverFileUrl + res.data.url
+          //   }
+          // })
+          API.common.uploadExternalOs(param).then(da => { // 直接三方接口上传
+            console.log(da.data.url)
+            this.ruleForm.listImg = da.data.url
           })
+          // API.common.uploadOs(param).then(da => { // 上传服务器中转三方接口
+          //   console.log(da.data.url)
+          //   this.ruleForm.listImg = da.data.url
+          // })
         }
 
         return false
@@ -226,9 +237,11 @@
       handleUploadSuccess (response, file, fileList) {
         console.log(response, file, fileList)
         if (this.ruleForm.detailImgs) {
-          this.ruleForm.detailImgs += ',' + serverFileUrl + response.data.url
+          // this.ruleForm.detailImgs += ',' + serverFileUrl + response.data.url
+          this.ruleForm.detailImgs += ',' + response.data.url
         } else {
-          this.ruleForm.detailImgs = serverFileUrl + response.data.url
+          // this.ruleForm.detailImgs = serverFileUrl + response.data.url
+          this.ruleForm.detailImgs = response.data.url
         }
       },
       handlePictureCardPreview (file) {
