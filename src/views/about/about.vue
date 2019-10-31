@@ -108,10 +108,10 @@
         name: 'keyWords',
         content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
       }],
-      link: [{ // set link
-        rel: 'asstes',
-        href: 'https://assets-cdn.github.com/'
-      }]
+      // link: [{ // set link
+      //   rel: 'asstes',
+      //   href: 'https://assets-cdn.github.com/'
+      // }]
     },
     data () {
       return {
@@ -218,10 +218,10 @@
                             div {
                                 font-size: 19px;
                                 font-family: PingFang SC;
-                                font-weight: bold;
+                                /*font-weight: bold;*/
                                 color: rgba(23, 23, 23, 1);
-                                margin-bottom: 30px;
-                                line-height: 1.6;
+                                margin-bottom: 20px;
+                                line-height: 1.2;
                             }
                         }
                     }
@@ -272,7 +272,7 @@
                             }
 
                             .title {
-                                font-weight: bold;
+                                /*font-weight: bold;*/
                                 font-size: 49px;
                                 position: relative;
                                 margin-bottom: 40px;
@@ -281,7 +281,7 @@
                             .intro {
                                 font-size: 16px;
                                 font-family: PingFang SC;
-                                font-weight: bold;
+                                /*font-weight: bold;*/
                                 color: rgba(23, 23, 23, 1);
                                 margin-bottom: 10px;
                             }

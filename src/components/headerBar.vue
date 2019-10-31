@@ -4,12 +4,12 @@
             <div class="l"><img src="../assets/logo.png" alt=""></div>
             <div class="r">
                 <ul>
-                    <li @click="navPage('home')" :class="{active: active=='home'}">HOME</li>
-                    <li @click="navPage('product')" :class="{active: active=='product'}">PRODUCT</li>
-                    <li @click="navPage('news')" :class="{active: active=='news'}">NEWS</li>
-                    <li @click="navPage('faqs')" :class="{active: active=='faqs'}">FAQS</li>
-                    <li @click="navPage('about')" :class="{active: active=='about'}">ABOUT US</li>
-                    <li @click="navPage('contact')" :class="{active: active=='contact'}">CONTACT US</li>
+                    <li @click="navPage('home')" :class="{active: active=='home', notAc: active!=='home'}">HOME</li>
+                    <li @click="navPage('product')" :class="{active: active=='product', notAc: active!=='product'}">PRODUCT</li>
+                    <li @click="navPage('news')" :class="{active: active=='news', notAc: active!=='news'}">NEWS</li>
+                    <li @click="navPage('faqs')" :class="{active: active=='faqs', notAc: active!=='faqs'}">FAQS</li>
+                    <li @click="navPage('about')" :class="{active: active=='about', notAc: active!=='about'}">ABOUT US</li>
+                    <li @click="navPage('contact')" :class="{active: active=='contact', notAc: active!=='contact'}">CONTACT US</li>
                 </ul>
             </div>
         </div>
@@ -62,13 +62,15 @@
 
                     li {
                         padding: 0 20px;
-                        font-weight: bold;
+                        /*font-weight: bold;*/
                         font-size: 23px;
                         cursor: pointer;
+                        transition: all 0.2s;
 
-                        &:hover {
-                            background-color: #171717;
+                        &.notAc:hover {
+                            /*background-color: #171717;*/
                             color: #F3C13C;
+                            transform: scale(1.1);
                         }
 
                         &.active {

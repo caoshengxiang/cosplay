@@ -13,10 +13,10 @@
         name: 'keyWords',
         content: 'GAUSS POWER'
       }],
-      link: [{ // set link
-        rel: 'asstes',
-        href: 'https://assets-cdn.github.com/'
-      }]
+      // link: [{ // set link
+      //   rel: 'asstes',
+      //   href: 'https://assets-cdn.github.com/'
+      // }]
     },
     props: {
       msg: String

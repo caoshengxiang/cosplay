@@ -162,10 +162,10 @@
         name: 'keyWords',
         content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
       }],
-      link: [{ // set link
-        rel: 'asstes',
-        href: 'https://assets-cdn.github.com/'
-      }]
+      // link: [{ // set link
+      //   rel: 'asstes',
+      //   href: 'https://assets-cdn.github.com/'
+      // }]
     },
     components: {
       headerBar,

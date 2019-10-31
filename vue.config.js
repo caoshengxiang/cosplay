@@ -1,9 +1,10 @@
 const path = require('path')
+const webpack = require('webpack')
 const PrerenderSpaPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSpaPlugin.PuppeteerRenderer
-// const resolve = dir => {
-//   return path.join(__dirname, dir)
-// }
+const resolve = dir => {
+  return path.join(__dirname, dir)
+}
 // 项目部署基础
 // 默认情况下，应用将被部署在域的根目录下,
 // 默认：'/'
@@ -19,9 +20,13 @@ module.exports = {
   publicPath: BASE_URL,
   // 如果你不需要使用eslint，把lintOnSave设为false即可
   lintOnSave: true,
-  // chainWebpack: config => {
-  //   config.resolve.alias.set('@', resolve('src'))
-  // },
+  chainWebpack: config => {
+    config.resolve.alias.set('@', resolve('src'))
+
+    config.plugin('provide').use(webpack.ProvidePlugin, [{
+      'window.Quill': 'quill'
+    }])
+  },
   // 设为false打包时不生成.map文件
   productionSourceMap: true,
   runtimeCompiler: true,
@@ -64,7 +69,7 @@ module.exports = {
           // 这个目录只能有一级，如果目录层次大于一级，在生成的时候不会有任何错误提示，在预渲染的时候只会卡着不动。
           staticDir: path.join(__dirname, 'dist'),
           // 对应自己的路由文件，比如a有参数，就需要写成 /a/param1。
-          routes: ['/', '/test/1', '/web/about/', '/web/contact/', '/web/faqs/'],
+          routes: ['/', '/test/1', '/web/', '/web/about/', '/web/contact/'], // 这里有个坑，如果是子路由，就把父路由也写上 /web/
           // 这个很重要，如果没有配置这段，也不会进行预编译
           renderer: new Renderer({
             inject: {

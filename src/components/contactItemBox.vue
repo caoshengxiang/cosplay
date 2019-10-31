@@ -25,10 +25,10 @@
         div {
             font-size: 19px;
             font-family: PingFang SC;
-            font-weight: bold;
+            /*font-weight: bold;*/
             color: rgba(23, 23, 23, 1);
-            margin-bottom: 30px;
-            line-height: 1.6;
+            margin-bottom: 20px;
+            line-height: 1.2;
             cursor: pointer;
 
             &.cate:hover {

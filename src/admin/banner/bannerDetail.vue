@@ -165,8 +165,9 @@
           //     this.ruleForm.imgUrl = serverFileUrl + res.data.url
           //   }
           // })
-          API.common.uploadExternalOs(param, (res) => {
+          API.common.uploadExternalOs(param).then((res) => {
             if (res.status) {
+              console.log(res.data.url)
               this.ruleForm.imgUrl = res.data.url
             }
           })
@@ -197,7 +198,7 @@
           //     this.ruleForm.subImg = serverFileUrl + res.data.url
           //   }
           // })
-          API.common.uploadExternalOs(param, (res) => {
+          API.common.uploadExternalOs(param).then((res) => {
             if (res.status) {
               this.ruleForm.subImg = res.data.url
             }

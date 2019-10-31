@@ -167,7 +167,7 @@
           //     this.ruleForm.listImg = serverFileUrl + res.data.url
           //   }
           // })
-          API.common.uploadExternalOs(param, (res) => {
+          API.common.uploadExternalOs(param).then((res) => {
             if (res.status) {
               this.ruleForm.listImg = res.data.url
             }
