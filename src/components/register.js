@@ -6,7 +6,7 @@ import MetaInfo from 'vue-meta-info'
 import moment from 'moment'
 import webStorage from 'webStorage'
 import VueCookies from 'vue-cookies'
-// import { serverUrl, serverFileUrl } from '../utils/const'
+import { uploadExternalOsUrl } from '../utils/const'
 
 // import 'bootstrap'
 // import 'bootstrap/dist/css/bootstrap.min.css'
@@ -127,7 +127,7 @@ let editorOption = {
     ImageExtend: {
       loading: true, // 可选参数 是否显示上传进度和提示语
       name: 'file', // 图片参数名, 这个是form-data key
-      action: 'http://119.27.160.97:7995/suining/file/upload', // 服务器地址, 如果action为空，则采用base64插入图片
+      action: uploadExternalOsUrl, // 服务器地址, 如果action为空，则采用base64插入图片
       size: 3, // 可选参数 图片大小，单位为M，1M = 1024kb
       // response 为一个函数用来获取服务器返回的具体图片地址
       // 例如服务器返回{code: 200; data:{ url: 'baidu.com'}}

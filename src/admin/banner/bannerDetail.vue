@@ -165,11 +165,15 @@
           //     this.ruleForm.imgUrl = serverFileUrl + res.data.url
           //   }
           // })
-          API.common.uploadExternalOs(param).then((res) => {
-            if (res.status) {
-              console.log(res.data.url)
-              this.ruleForm.imgUrl = res.data.url
-            }
+          // API.common.uploadExternalOs(param).then((res) => {
+          //   if (res.status) {
+          //     console.log(res.data.url)
+          //     this.ruleForm.imgUrl = res.data.url
+          //   }
+          // })
+          API.common.uploadOs(param).then(da => { // 上传aws
+            console.log(da.data.url)
+            this.ruleForm.imgUrl = da.data.url
           })
         }
 
@@ -198,10 +202,13 @@
           //     this.ruleForm.subImg = serverFileUrl + res.data.url
           //   }
           // })
-          API.common.uploadExternalOs(param).then((res) => {
-            if (res.status) {
-              this.ruleForm.subImg = res.data.url
-            }
+          // API.common.uploadExternalOs(param).then((res) => {
+          //   if (res.status) {
+          //     this.ruleForm.subImg = res.data.url
+          //   }
+          // })
+          API.common.uploadOs(param).then(da => { // 上传aws
+            this.ruleForm.subImg = da.data.url
           })
         }
 

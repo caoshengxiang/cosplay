@@ -149,7 +149,7 @@
           if (valid) {
             API.email.send(this.ruleForm).then(da => {
               if (da.status) {
-                this.$message.success('消息发送成功！我们会尽快与你联系')
+                this.$message.success('Submit successfully,we will contact you soon!')
                 this.ruleForm = {
                   name: '',
                   company: '',

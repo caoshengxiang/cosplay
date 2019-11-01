@@ -222,14 +222,14 @@
           //     this.ruleForm.listImg = serverFileUrl + res.data.url
           //   }
           // })
-          API.common.uploadExternalOs(param).then(da => { // 直接三方接口上传
-            console.log(da.data.url)
-            this.ruleForm.listImg = da.data.url
-          })
-          // API.common.uploadOs(param).then(da => { // 上传服务器中转三方接口
+          // API.common.uploadExternalOs(param).then(da => { // 直接三方接口上传
           //   console.log(da.data.url)
           //   this.ruleForm.listImg = da.data.url
           // })
+          API.common.uploadOs(param).then(da => { // 上传aws
+            console.log(da.data.url)
+            this.ruleForm.listImg = da.data.url
+          })
         }
 
         return false

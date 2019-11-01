@@ -31,7 +31,7 @@ export default {
 
     uploadOs (params) {
       return new Promise((resolve, reject) => {
-        $axios.post('common/upload/cos', params,
+        $axios.post('common/upload/aws', params,
           {
             'Content-Type': 'multipart/form-data'
           }).then((res) => {

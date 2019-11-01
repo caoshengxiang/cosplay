@@ -56,7 +56,7 @@
 
 <script>
   import API from '../../utils/api'
-  import { serverFileUrl } from '../../utils/const'
+  // import { serverFileUrl } from '../../utils/const'
 
   export default {
     name: 'newsDetail',
@@ -167,10 +167,14 @@
           //     this.ruleForm.listImg = serverFileUrl + res.data.url
           //   }
           // })
-          API.common.uploadExternalOs(param).then((res) => {
-            if (res.status) {
-              this.ruleForm.listImg = res.data.url
-            }
+          // API.common.uploadExternalOs(param).then((res) => {
+          //   if (res.status) {
+          //     this.ruleForm.listImg = res.data.url
+          //   }
+          // })
+
+          API.common.uploadOs(param).then(da => { // 上传aws
+            this.ruleForm.listImg = da.data.url
           })
         }
 
