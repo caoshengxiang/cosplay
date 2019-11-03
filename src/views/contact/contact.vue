@@ -27,7 +27,13 @@
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
-                    <div class="nav-pos">HOME > CONTACT US</div>
+<!--                    <div class="nav-pos">HOME > CONTACT US</div>-->
+                    <div class="nav-pos">
+                        <el-breadcrumb separator-class="el-icon-arrow-right">
+                            <el-breadcrumb-item :to="{ path: '/' }">HOME</el-breadcrumb-item>
+                            <el-breadcrumb-item>CONTACT US</el-breadcrumb-item>
+                        </el-breadcrumb>
+                    </div>
                     <div class="box">
                         <div class="l">
                             <div class="b">
@@ -61,6 +67,7 @@
                                     </el-form-item>
                                     <el-form-item>
                                         <img
+                                                class="hvr-buzz-out"
                                                 @click="submitForm('ruleForm')"
                                                 style="width:245px;height: 56px;margin-left: 54px;"
                                                 src="../../../public/img/send-message.png"

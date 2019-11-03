@@ -27,11 +27,17 @@
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
-                    <div class="nav-pos">HOME > NEWS</div>
+<!--                    <div class="nav-pos">HOME > NEWS</div>-->
+                    <div class="nav-pos">
+                        <el-breadcrumb separator-class="el-icon-arrow-right">
+                            <el-breadcrumb-item :to="{ path: '/' }">HOME</el-breadcrumb-item>
+                            <el-breadcrumb-item>NEWS</el-breadcrumb-item>
+                        </el-breadcrumb>
+                    </div>
                     <div class="box">
                         <div class="l">
                             <div class="b">
-                                <div class="title">CONTACT US</div>
+                                <div class="title" @click="$router.push({name: 'contact'})">CONTACT US</div>
                                 <contactItemBox></contactItemBox>
                             </div>
                         </div>
@@ -43,7 +49,7 @@
                                             <div class="p-item">
                                                 <div class="f-i">
                                                     <el-image
-                                                            class="pro-img"
+                                                            class="pro-img hvr-grow"
                                                             :src="item.listImg"
                                                             fit="fit"></el-image>
                                                 </div>

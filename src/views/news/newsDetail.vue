@@ -24,11 +24,18 @@
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
-                    <div class="nav-pos">HOME > NEWS > {{detail.title}}</div>
+<!--                    <div class="nav-pos">HOME > NEWS > {{detail.title}}</div>-->
+                    <div class="nav-pos">
+                        <el-breadcrumb separator-class="el-icon-arrow-right">
+                            <el-breadcrumb-item :to="{ path: '/' }">HOME</el-breadcrumb-item>
+                            <el-breadcrumb-item :to="{name: 'news'}">NEWS</el-breadcrumb-item>
+                            <el-breadcrumb-item>{{detail.title}}</el-breadcrumb-item>
+                        </el-breadcrumb>
+                    </div>
                     <div class="box">
                         <div class="l">
                             <div class="b">
-                                <div class="title">CONTACT US</div>
+                                <div class="title" @click="$router.push({name: 'contact'})">CONTACT US</div>
                                 <contactItemBox></contactItemBox>
                             </div>
                         </div>

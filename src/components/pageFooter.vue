@@ -7,9 +7,9 @@
                         <div><img class="logo" src="../assets/logo.png" alt=""></div>
                         <div>Chengdu Gauss Power Technology Co., Ltd</div>
                         <div>Phone: +8618628067519</div>
-                        <div>Emai: gausspowermanager@163.com</div>
+                        <div><a href="mailto:info@armor4cos.com">Emai: info@armor4cos.com</a></div>
                         <div>
-                            Address: 5, 6, 7, 8 Floor, Area C and 6, 7 Floor, Area B, Building 1, No. 200, Tianfu 5th Street,High-tech Zone,Chengdu,
+                            Floor 7, Area B, Building 1, No. 200, Tianfu 5th Street,High-tech Zone,Chengdu,
                             China (Sichuan) Pilot Free Trade Zone
                         </div>
                     </el-col>
@@ -43,7 +43,7 @@
                         <div class="text">
                             We offer not only priducts,but also
                             our after.sales service.Welcome to
-                            ontact us to know more
+                            contact us to know more
                         </div>
                         <div class="contact">
                             <router-link :to="{name: 'contact'}"><el-button>contact us</el-button></router-link>
@@ -51,6 +51,7 @@
                     </el-col>
                 </el-row>
             </div>
+            <floatbar></floatbar>
         </div>
         <div class="copyright">Copyright © Chengdu Super Queen Art Co.,Ltd All Rights Reserved. Sichuan ICP No. 19033486</div>
     </div>
@@ -58,9 +59,13 @@
 
 <script>
   import API from '../utils/api'
+  import floatbar from './floatbar'
 
   export default {
     name: 'pageFooter',
+    components: {
+      floatbar,
+    },
     data () {
       return {
         productCateList_6: []

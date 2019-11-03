@@ -27,14 +27,21 @@
         <div class="com-item-fill pro-bg">
             <div class="com-item-con logo-bg">
                 <div class="contain">
-                    <div class="nav-pos">HOME > PRODUCTS > {{productCateName}}</div>
+                    <!--                    <div class="nav-pos">HOME > PRODUCTS > {{productCateName}}</div>-->
+                    <div class="nav-pos">
+                        <el-breadcrumb separator-class="el-icon-arrow-right">
+                            <el-breadcrumb-item :to="{ path: '/' }">HOME</el-breadcrumb-item>
+                            <el-breadcrumb-item>PRODUCTS</el-breadcrumb-item>
+                            <el-breadcrumb-item>{{productCateName}}</el-breadcrumb-item>
+                        </el-breadcrumb>
+                    </div>
                     <div class="box">
                         <div class="l">
                             <div class="b">
                                 <div class="title">PRODUCTS</div>
                                 <div class="item-box">
                                     <div
-                                            class="cate"
+                                            class="cate hvr-underline-from-center"
                                             :class="{active: item.name === productCateName}"
                                             @click="productCateHandle(item)"
                                             v-for="(item, index) in productCateList"
@@ -43,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="b">
-                                <div class="title">CONTACT US</div>
+                                <div class="title" @click="$router.push({name: 'contact'})">CONTACT US</div>
                                 <contactItemBox></contactItemBox>
                             </div>
                         </div>
@@ -53,7 +60,7 @@
                                     <el-col v-for="(item, index) in tableData" :key="index" :span="6">
                                         <div :title="item.title" class="p-item" @click="toDetail(item)">
                                             <el-image
-                                                    class="pro-img"
+                                                    class="pro-img hvr-grow-shadow"
                                                     :src="item.listImg"
                                                     fit="fit"></el-image>
                                             <div class="name">{{item.title}}</div>
@@ -119,6 +126,12 @@
         currentPage: 1,
         pageSize: 12,
         loading: false,
+      }
+    },
+    watch: {
+      '$route.query.productCateName' (val)  {
+        this.productCateName = val
+        this.handleCurrentChange(1)
       }
     },
     computed: {},
@@ -193,6 +206,7 @@
 <style scoped lang="less">
     @import "../../styles/common";
     @import "../../styles/var";
+    @import "../../styles/animate/hover.css";
 
     .home-page {
         .banner-box {
@@ -266,12 +280,13 @@
                                 font-family: PingFang SC;
                                 /*font-weight: bold;*/
                                 color: rgba(23, 23, 23, 1);
-                                margin-bottom: 20px;
-                                line-height: 1.2;
+                                margin-bottom: 16px;
+                                line-height: 1;
+                                height: 24px;
                                 cursor: pointer;
 
                                 &.cate:hover {
-                                    text-decoration: underline;
+
                                 }
 
                                 &.active {

@@ -6,6 +6,7 @@ import './registerServiceWorker'
 import './styles/basic.less'
 import './element_ui' // element
 import './components/register'
+import './styles/animate/hover.css'
 
 Vue.config.productionTip = false
 

@@ -4,9 +4,9 @@
             Chengdu Gauss Power Technology Co., Ltd
         </div>
         <div>Phone: +8618628067519</div>
-        <div style="word-wrap: break-word;word-break: break-all">Emai: gausspowermanager@163.com</div>
+        <div style="word-wrap: break-word;word-break: break-all"><a href="mailto:info@armor4cos.com">Emai: info@armor4cos.com</a></div>
         <div style="text-align: justify;word-wrap: break-word;word-break: break-all">
-            Address: 5, 6, 7, 8 Floor, Area C and 6, 7 Floor, Area B, Building 1, No. 200, Tianfu 5th Street,High-tech Zone,Chengdu,
+            Floor 7, Area B, Building 1, No. 200, Tianfu 5th Street,High-tech Zone,Chengdu,
             China (Sichuan) Pilot Free Trade Zone
         </div>
     </div>
@@ -30,7 +30,9 @@
             margin-bottom: 20px;
             line-height: 1.2;
             cursor: pointer;
-
+            a {
+                /*color: rgba(23, 23, 23, 1);*/
+            }
             &.cate:hover {
                 text-decoration: underline;
             }

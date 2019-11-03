@@ -9,7 +9,7 @@
                 <el-carousel-item v-for="(item, index) in bannerList" :key="index">
                     <a v-if="item.link" :href="item.link" target="_blank">
                         <el-image style="height: 100%" fit="cover"
-                                         :src="item.imgUrl"></el-image>
+                                  :src="item.imgUrl"></el-image>
                     </a>
                     <el-image v-else style="height: 100%" fit="cover"
                               :src="item.imgUrl"></el-image>
@@ -32,14 +32,18 @@
                 <div class="products">
                     <div class="title">PRODUCTS</div>
                     <div class="show-pro">
-                        <el-image
-                                v-for="(item, index) in productList_4"
-                                :key="index"
-                                class="pro-img"
+                        <router-link :to="{name: 'productDetail', query: {_id: item._id}}"
+                                     v-for="(item, index) in productList_4"
+                                     :key="index">
+                            <el-image
+                                class="pro-img hvr-bounce-in"
                                 :src="item.listImg"
                                 fit="fill"></el-image>
+                        </router-link>
                     </div>
-                    <router-link :to="{name: 'product'}"><div class="pro-more">MORE+</div></router-link>
+                    <router-link :to="{name: 'product'}">
+                        <div class="pro-more hvr-buzz-out">MORE+</div>
+                    </router-link>
                 </div>
                 <div class="choose">
                     <div style="text-align: right">
@@ -87,7 +91,9 @@
                             </div>
                         </div>
                     </div>
-                    <router-link :to="{name: 'about'}"><div class="choose-more">MORE+</div></router-link>
+                    <router-link :to="{name: 'about'}">
+                        <div class="choose-more">MORE+</div>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -96,48 +102,50 @@
             <div class="com-item-con faqs">
                 <div class="title">FAQS</div>
                 <div class="con">
-                    <img   class="f-img" src="../../../public/img/home-1.png" alt="">
-<!--                    <el-image-->
-<!--                            class="f-img"-->
-<!--                            src="../../../public/img/home-1.png"-->
-<!--                            fit="fill"></el-image>-->
+                    <img class="f-img" src="../../../public/img/home-1.png" alt="">
+                    <!--                    <el-image-->
+                    <!--                            class="f-img"-->
+                    <!--                            src="../../../public/img/home-1.png"-->
+                    <!--                            fit="fill"></el-image>-->
                     <div class="faqs-box">
-                        <div class="line-1"></div>
-                        <div class="line-2"></div>
-                        <div class="line-3"></div>
-                        <div class="line-4"></div>
-                        <div class="l-yinhao">“</div>
-                        <div class="faq-list">
-                            <div class="faq" v-for="(item, index) in faqsList_4" :key="index">
-                                <div class="index">{{index + 1}}</div>
-                                <div class="text">
-                                    <div class="q">{{item.q}}</div>
-                                    <div class="a">{{item.a}}</div>
+                        <router-link :to="{name: 'faqs'}">
+                            <div class="line-1"></div>
+                            <div class="line-2"></div>
+                            <div class="line-3"></div>
+                            <div class="line-4"></div>
+                            <div class="l-yinhao">“</div>
+                            <div class="faq-list">
+                                <div class="faq" v-for="(item, index) in faqsList_4" :key="index">
+                                    <div class="index">{{index + 1}}</div>
+                                    <div class="text">
+                                        <div class="q">{{item.q}}</div>
+                                        <div class="a">{{item.a}}</div>
+                                    </div>
                                 </div>
+                                <!--                            <div class="faq">-->
+                                <!--                                <div class="index">2</div>-->
+                                <!--                                <div class="text">-->
+                                <!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
+                                <!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
+                                <!--                                </div>-->
+                                <!--                            </div>-->
+                                <!--                            <div class="faq">-->
+                                <!--                                <div class="index">3</div>-->
+                                <!--                                <div class="text">-->
+                                <!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
+                                <!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
+                                <!--                                </div>-->
+                                <!--                            </div>-->
+                                <!--                            <div class="faq">-->
+                                <!--                                <div class="index">4</div>-->
+                                <!--                                <div class="text">-->
+                                <!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
+                                <!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
+                                <!--                                </div>-->
+                                <!--                            </div>-->
                             </div>
-<!--                            <div class="faq">-->
-<!--                                <div class="index">2</div>-->
-<!--                                <div class="text">-->
-<!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
-<!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="faq">-->
-<!--                                <div class="index">3</div>-->
-<!--                                <div class="text">-->
-<!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
-<!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="faq">-->
-<!--                                <div class="index">4</div>-->
-<!--                                <div class="text">-->
-<!--                                    <div class="q">Q:The costumes are fit for adults or young?</div>-->
-<!--                                    <div class="a">A.our all costumes fit for adults.</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-                        </div>
-                        <div class="r-yinhao">”</div>
+                            <div class="r-yinhao">”</div>
+                        </router-link>
                     </div>
                 </div>
             </div>
