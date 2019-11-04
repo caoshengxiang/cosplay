@@ -1,5 +1,5 @@
 <template>
-    <div class="com-pages home-page">
+    <div class="com-pages home-page web-page">
         <header-bar active="news"></header-bar>
         <div class="banner-box">
             <el-carousel :interval="5000" height="500px" @change="carouselChange" :initial-index="initialIndex">
