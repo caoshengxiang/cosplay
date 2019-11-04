@@ -28,7 +28,7 @@
                             <router-link :to="{name: 'about'}">About Us</router-link>
                         </div>
                         <div>
-                            <router-link :to="{name: 'contact'}">Contct</router-link>
+                            <router-link :to="{name: 'contact'}">Contact</router-link>
                         </div>
                     </el-col>
                     <el-col :span="6" class="col-2">
