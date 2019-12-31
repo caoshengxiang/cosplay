@@ -2,7 +2,7 @@
     <div class="float-bar">
         <div class="item">
             <a target="_blank"
-               href="https://www.facebook.com/Gauss-Power-Armor-Cos-Costumes-102572031175840/?modal=admin_todo_tour">
+               href="https://www.facebook.com/armor4cos/">
                 <img class="icon" src="../../public/img/icons/Facebook.png" alt="">
             </a>
             <a target="_blank" href="https://www.instagram.com/gausspower/">

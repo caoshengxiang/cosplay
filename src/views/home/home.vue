@@ -22,7 +22,10 @@
                         :src="bannerList[initialIndex].subImg"
                         fit="contain"></el-image>
             </div>
-            <share-bar></share-bar>
+            <div class="home-bg2-box">
+                <share-bar></share-bar>
+                <img class="home-bg2" src="../../../public/img/images/home-bg2.png" alt="">
+            </div>
         </div>
         <div class="com-item-fill pro-bg">
             <div class="com-item-con">
@@ -98,7 +101,7 @@
             </div>
         </div>
 
-        <div class="com-item-fill">
+        <div class="com-item-fill faqs-bg">
             <div class="com-item-con faqs">
                 <div class="title">FAQS</div>
                 <div class="con">
@@ -400,7 +403,7 @@
         }
 
         .faqs {
-            margin-top: 50px;
+            padding-top: 50px;
 
             .title {
                 font-weight: bold;
@@ -549,6 +552,18 @@
                     }
                 }
             }
+        }
+    }
+    .faqs-bg {
+        background-image: url("../../../public/img/images/home-bg1.png");
+    }
+    .home-bg2-box {
+        position: relative;
+        .home-bg2 {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 600px;
         }
     }
 </style>

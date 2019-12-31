@@ -58,7 +58,7 @@
 
 <script>
   import API from '../../utils/api'
-  import { serverFileUrl } from '../../utils/const'
+  // import { serverFileUrl } from '../../utils/const'
 
   export default {
     name: 'bannerDetail',

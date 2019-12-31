@@ -53,7 +53,7 @@
             </div>
             <floatbar></floatbar>
         </div>
-        <div class="copyright">Copyright © Chengdu Super Queen Art Co.,Ltd All Rights Reserved. Sichuan ICP No. 19033486</div>
+        <div class="copyright">Copyright © Chengdu Gauss Power Technology Co.,Ltd All Rights Reserved. Sichuan ICP No. 19033486</div>
     </div>
 </template>
 

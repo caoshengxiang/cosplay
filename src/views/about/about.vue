@@ -48,8 +48,7 @@
                                         <div class="p-item p-item-1">
                                             <div class="title">Our History</div>
                                             <div class="intro"  style="text-align: justify">
-                                                Chengdu Gauss Power Technology Co., Ltd is a professional production-manufacturing enterprise specialized in cosplay costume design and production. Our company has been established since 2015 to grow up to be a team of high-quality, united, hard-working and truth-seeking characters. We own an independent studio, professional team with ten years of experience in China;All the costumes are handmade and we win a good reputation in Cosplay field.
-                                            </div>
+                                                1.Chengdu Gauss Power Technology Co., Ltd is a professional production-manufacturing enterprise specialized in cosplay costume，entertainment device design and production. Our company has been established since 2015 to grow up to be a team of high-quality, united, hard-working and truth-seeking characters. We own an independent studio, professional team with ten years of experience in China.</div>
 <!--                                            <el-image-->
 <!--                                                    class="fix-img"-->
 <!--                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"-->
@@ -58,8 +57,8 @@
                                         </div>
                                         <div class="p-item p-item-2">
                                             <div class="title">Our studio</div>
-                                            <div class="intro">Our studio has 10 years of experience in making props costumes and we own many experienced designers, drafters, tailors and packing staff.
-                                            </div>
+                                            <div class="intro">
+                                                Our studio has 10 years of experience in making props costumes and entertainment device;own many experienced designers, drafters, tailors and packing staff.</div>
 <!--                                            <el-image-->
 <!--                                                    class="fix-img"-->
 <!--                                                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"-->
@@ -67,10 +66,11 @@
                                             <img class="fix-img" src="../../../public/img/images/about-2.jpg" fit="contain" alt="">
                                         </div>
                                         <div class="p-item p-item-3">
-                                            <div class="title">our products</div>
+                                            <div class="title">Main products</div>
                                             <div class="intro">
-                                                1.Including Transformers costumes,Iron man costumes,Thanos costumes,Star wars costumes and other game roles.
-                                                The all costumes can be customized as customers’ demands.
+                                                Including Transformers costumes,Iron man costumes,Thanos costumes, Bubbles tree and others.
+                                                <br>
+                                                The all products  can be customized as customers’ demands.
                                             </div>
 <!--                                            <el-image-->
 <!--                                                    class="fix-img"-->

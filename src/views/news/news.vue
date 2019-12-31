@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="r">
-                            <div class="p-list">
+                            <div class="p-list" v-loading="loading">
                                 <el-row>
                                     <el-col v-for="(item, index) in tableData" :key="index" :span="24">
                                         <router-link :to="{name: 'newsDetail', query: {_id: item._id}}">

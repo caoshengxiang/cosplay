@@ -55,9 +55,9 @@
                             </div>
                         </div>
                         <div class="r">
-                            <div class="p-list">
+                            <div class="p-list" v-loading="loading">
                                 <el-row>
-                                    <el-col v-for="(item, index) in tableData" :key="index" :span="6">
+                                    <el-col v-for="(item, index) in tableData" :key="index" :span="8">
                                         <div :title="item.title" class="p-item" @click="toDetail(item)">
                                             <el-image
                                                     class="pro-img hvr-grow-shadow"
@@ -124,7 +124,7 @@
         tableData: [],
         total: 0,
         currentPage: 1,
-        pageSize: 12,
+        pageSize: 9,
         loading: false,
       }
     },
@@ -302,6 +302,7 @@
                     padding-left: 16px;
 
                     .p-list {
+                        width: 660px;
                         .p-item {
                             width: 178px;
                             margin-bottom: 41px;
