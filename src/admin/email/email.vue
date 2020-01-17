@@ -35,6 +35,11 @@
                     >
                     </el-table-column>
                     <el-table-column
+                            prop="country"
+                            label="国家"
+                    >
+                    </el-table-column>
+                    <el-table-column
                             prop="email"
                             label="邮箱"
                     >

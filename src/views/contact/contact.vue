@@ -49,6 +49,9 @@
                                     <el-form-item label="Your Name：" prop="name">
                                         <el-input v-model="ruleForm.name"></el-input>
                                     </el-form-item>
+                                    <el-form-item label="Country：" prop="country">
+                                        <el-input v-model="ruleForm.country"></el-input>
+                                    </el-form-item>
                                     <el-form-item label="Company：" prop="company">
                                         <el-input v-model="ruleForm.company"></el-input>
                                     </el-form-item>
@@ -119,6 +122,7 @@
         initialIndex: 0,
         ruleForm: {
           name: '',
+          country: '',
           company: '',
           email: '',
           phone: '',
@@ -159,6 +163,7 @@
                 this.$message.success('Submit successfully,we will contact you soon!')
                 this.ruleForm = {
                   name: '',
+                  country: '',
                   company: '',
                   email: '',
                   phone: '',
