@@ -96,7 +96,7 @@
 
   export default {
     metaInfo: {
-      title: 'NEWS', // set a title
+      title: 'NEWS -- GAUSS POWER', // set a title
       meta: [{ // set meta
         name: 'keyWords',
         content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'

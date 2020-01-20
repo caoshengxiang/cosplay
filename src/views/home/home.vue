@@ -168,7 +168,7 @@
 
   export default {
     metaInfo: {
-      title: 'HOME', // set a title
+      title: 'HOME -- GAUSS POWER', // set a title
       meta: [{ // set meta
         name: 'keyWords',
         content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'

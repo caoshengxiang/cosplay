@@ -97,16 +97,19 @@
   import shareBar from '../../components/shareBar'
 
   export default {
-    metaInfo: {
-      title: 'PRODUCT', // set a title
-      meta: [{ // set meta
-        name: 'keyWords',
-        content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
-      }],
-      // link: [{ // set link
-      //   rel: 'asstes',
-      //   href: 'https://assets-cdn.github.com/'
-      // }]
+    // 动态使用
+    metaInfo () {
+      return {
+        title: this.title, // set a title
+        meta: [{ // set meta
+          name: 'keyWords',
+          content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
+        }],
+        // link: [{ // set link
+        //   rel: 'asstes',
+        //   href: 'https://assets-cdn.github.com/'
+        // }]
+      }
     },
     components: {
       headerBar,
@@ -117,6 +120,7 @@
     name: 'product',
     data () {
       return {
+        title: 'PRODUCT -- GAUSS POWER',
         bannerList: [],
         initialIndex: 0,
         productCateList: [],
@@ -131,6 +135,7 @@
     watch: {
       '$route.query.productCateName' (val) {
         this.productCateName = val
+        this.title = this.productCateName + ' -- GAUSS POWER'
         this.handleCurrentChange(1)
       }
     },
@@ -166,7 +171,8 @@
       },
       productCateHandle (item) {
         this.productCateName = item.name
-        this.handleCurrentChange(1)
+        this.$router.push({name: 'product', query: {productCateName: item.name}})
+        // this.handleCurrentChange(1)
       },
       getData (callback) {
         this.loading = true

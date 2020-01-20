@@ -109,7 +109,7 @@
     },
     name: 'about',
     metaInfo: {
-      title: 'ABOUT US', // set a title
+      title: 'ABOUT US -- GAUSS POWER', // set a title
       meta: [{ // set meta
         name: 'keyWords',
         content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'

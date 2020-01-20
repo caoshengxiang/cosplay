@@ -160,16 +160,18 @@
   import shareBar from '../../components/shareBar'
 
   export default {
-    metaInfo: {
-      title: 'PRODUCT DETAILS', // set a title
-      meta: [{ // set meta
-        name: 'keywords',
-        content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
-      }],
-      // link: [{ // set link
-      //   rel: 'asstes',
-      //   href: 'https://assets-cdn.github.com/'
-      // }]
+    metaInfo () {
+      return {
+        title: this.title, // set a title
+        meta: [{ // set meta
+          name: 'keywords',
+          content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
+        }],
+        // link: [{ // set link
+        //   rel: 'asstes',
+        //   href: 'https://assets-cdn.github.com/'
+        // }]
+      }
     },
     components: {
       headerBar,
@@ -181,6 +183,7 @@
     name: 'detail',
     data () {
       return {
+        title: 'PRODUCT DETAILS -- GAUSS POWER',
         bannerList: [],
         initialIndex: 0,
         productCateList: [],
@@ -244,6 +247,7 @@
         this.loading = true
         API.product.detail({ _id: this.$route.query._id }).then(da => {
           this.detail = da.data
+          this.title = this.detail.title + ' -- GAUSS POWER'
           this.productCateName = da.data.productCateName
           this.imgUrls = da.data.detailImgs.split(',')
           setTimeout(() => {

@@ -99,7 +99,7 @@
 
   export default {
     metaInfo: {
-      title: 'CONTACT US', // set a title
+      title: 'CONTACT US -- GAUSS POWER', // set a title
       meta: [{ // set meta
         name: 'keyWords',
         content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'

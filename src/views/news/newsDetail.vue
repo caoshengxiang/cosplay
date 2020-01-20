@@ -64,16 +64,18 @@
   import shareBar from '../../components/shareBar'
 
   export default {
-    metaInfo: {
-      title: 'NEWS DETAILS', // set a title
-      meta: [{ // set meta
-        name: 'keywords',
-        content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
-      }],
-      // link: [{ // set link
-      //   rel: 'asstes',
-      //   href: 'https://assets-cdn.github.com/'
-      // }]
+    metaInfo () {
+      return {
+        title: this.title, // set a title
+        meta: [{ // set meta
+          name: 'keywords',
+          content: 'cosplay costumes,Transformers costumes,Iron man costumes,Armor prop'
+        }],
+        // link: [{ // set link
+        //   rel: 'asstes',
+        //   href: 'https://assets-cdn.github.com/'
+        // }]
+      }
     },
     components: {
       headerBar,
@@ -84,6 +86,7 @@
     name: 'newsDetail',
     data () {
       return {
+        title: 'NEWS DETAILS -- GAUSS POWER',
         bannerList: [],
         initialIndex: 0,
         loading: false,
@@ -112,6 +115,7 @@
         this.loading = true
         API.news.detail({ _id: this.$route.query._id }).then(da => {
           this.detail = da.data
+          this.title = this.detail.title + ' -- GAUSS POWER'
           setTimeout(() => {
             this.loading = false
             callback && callback()
